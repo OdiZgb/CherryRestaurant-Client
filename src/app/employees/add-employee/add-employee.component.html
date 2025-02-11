@@ -1,0 +1,29 @@
+<form [formGroup]="myForm">
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label for="employeeName">Employee Name (إسم المُوظف)</mat-label>
+        <input type="text" matInput formControlName="employeeName" placeholder="...جودت">
+        <mat-error *ngIf="myForm.controls['employeeName'].invalid || myForm.controls['employeeName']?.touched">
+                  الحقل فارغ
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label for="employeeEmail">Employee Email (إيميل المُوظف)</mat-label>
+        <input type="text" matInput formControlName="employeeEmail" placeholder="...jawdatt.1992@gmail.com">
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label for="employeeInitialPassword">Employee Initial Password (كلمة المرور اللإبتدائية)</mat-label>
+        <input type="text" matInput formControlName="employeeInitialPassword" placeholder="...Mohammad123!!!@password">
+        <mat-error *ngIf="myForm.controls['employeeInitialPassword'].invalid || myForm.controls['employeeInitialPassword']?.touched">
+          الحقل فارغ
+</mat-error>
+      </mat-form-field>
+    </div>  
+  <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+
+  </form>
+  <p-toast [position]="'bottom-right'"></p-toast>

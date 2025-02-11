@@ -1,0 +1,64 @@
+.product-card {
+    display: flex;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    margin: auto;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.product-image-barcode {
+    flex: 0 0 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 20px;
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.vertical-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.vertical-table th, .vertical-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.vertical-table th {
+    background-color: #f2f2f2;
+    color: black;
+    text-align: left;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.vertical-table td {
+    color: #777;
+    font-size: 20px;
+}
+p-button{
+    padding: 10px;
+}
+/* barcode-generator.component.scss */
+:host {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  svg {
+    width: 100%;
+    height: auto;
+  }
+  

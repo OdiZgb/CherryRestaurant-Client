@@ -1,0 +1,32 @@
+<div *ngIf="loggedin==true">
+  <div class="container-fluid" >
+    <div  class="row" style="float: right;">
+      <mat-toolbar  style="width: 100%;float: left;  background-color: rgb(221, 57, 57);;">
+        <div style="width: 95%;">
+          <span style=" float: left;cursor:pointer; color:white;font-weight: bold;" (click)="navigateToDefaulRoute()">CherryRestaurant</span>
+        </div>
+        <p-splitButton style="margin-top: 10px;" styleClass="p-button-raised p-button-danger mr-2 mb-2" label="{{username}}" icon="pi pi-user" (onClick)="logout()" [model]="items"></p-splitButton>
+
+       </mat-toolbar>
+    </div>
+    <div  class="row">
+      <div  class="col-md-3" style="margin-left: 0;padding: 0px;background-color: whitesmoke;">
+        <app-side-panel></app-side-panel>
+      </div>
+      <div class="col-md-9" style="float: left;padding-top: 3px;  
+       background-color: white">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  
+  <footer >
+    <h5 style="text-align: center;">© all Copyrights reserved CherryRestaurant {{date}}</h5>
+  </footer>
+</div>
+
+<div style="width: 100%;" *ngIf="loggedin==false">
+  <app-login style="width: 100%;" ></app-login>
+</div>
+<p-toast [position]="'bottom-right'"></p-toast>
+

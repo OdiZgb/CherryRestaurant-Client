@@ -1,0 +1,13 @@
+<mat-card style=" max-height:300px;min-height:auto; margin-top: 10px; min-width: 20% " class="example-card" >
+    <button (click)="deleteCategory()"  mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
+      <mat-icon>delete</mat-icon>
+    </button>
+  <mat-card-header>
+
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title> <h1>{{ name }}</h1></mat-card-title>
+  </mat-card-header>
+  <img mat-card-image style=" height: 100%;width: auto; overflow: auto;" src="{{src}}" alt="CherryRestaurant Photo">
+
+</mat-card>
+

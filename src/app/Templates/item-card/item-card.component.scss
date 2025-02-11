@@ -1,0 +1,58 @@
+/* Container for cards */
+.card-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping of cards to the next row */
+  gap: 20px; /* Adds spacing between cards */
+  justify-content: center; /* Center aligns the cards */
+  padding: 20px; /* Adds padding around the container */
+  box-sizing: border-box;
+}
+
+/* Individual card */
+.card {
+  flex: 1 1 calc(33.33% - 40px); /* Responsive width: 3 cards per row */
+  max-width: 300px; /* Ensures cards have a consistent maximum size */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  border-radius: 10px; /* Rounded corners for a modern look */
+  transition: transform 0.3s, box-shadow 0.3s; /* Hover animations */
+}
+
+/* Hover effect for cards */
+.card:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+}
+
+/* Chip container */
+.chip-container {
+  display: flex;
+  justify-content: center; /* Centers the chips horizontally */
+  flex-wrap: wrap; /* Allows chips to wrap to the next line if necessary */
+  gap: 8px; /* Adds consistent spacing between chips */
+}
+
+/* Chip styling */
+.spaced-chip {
+  padding: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 16px; /* Rounded chips */
+  background-color: #f1f1f1; /* Light background */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: background-color 0.3s;
+}
+
+.spaced-chip:hover {
+  background-color: #e0e0e0; /* Darker background on hover */
+}
+
+/* Image styling */
+img {
+  transition: all 0.2s ease-in-out; /* Smooth hover animation */
+  border-radius: 10px 10px 0 0; /* Matches card radius */
+}
+
+img:hover {
+  cursor: pointer;
+  filter: blur(2px);
+}

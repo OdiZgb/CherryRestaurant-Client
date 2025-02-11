@@ -1,0 +1,20 @@
+
+<div class="card">
+    <p-table [value]="employees" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Name</th>
+                <th>Number</th>
+                <th>Email</th>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-empl>
+            <tr>
+                <td>{{ empl?.user?.name }}</td>
+                <td>{{ empl?.mobileNumber }}</td>
+                <td>{{ empl?.user?.email }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

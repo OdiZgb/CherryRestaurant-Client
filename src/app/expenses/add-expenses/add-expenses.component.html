@@ -1,0 +1,13 @@
+<form [formGroup]="myForm">
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label for="expenseNameValue">Expense Name or Type (نوع النفقة)</mat-label>
+        <input type="text" matInput formControlName="expenseNameValue" placeholder="...كهرباء">
+        <mat-error *ngIf="myForm.controls['expenseNameValue'].invalid || myForm.controls['expenseNameValue']?.touched">
+                  الحقل فارغ
+        </mat-error>
+      </mat-form-field>
+    </div>
+  <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+</form>
+<p-toast [position]="'bottom-right'"></p-toast>

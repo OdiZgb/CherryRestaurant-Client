@@ -1,0 +1,68 @@
+<h2>Edit Inventory</h2>
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <mat-label>Name</mat-label>
+      <input type="text" matInput formControlName="name">
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <mat-label>Category</mat-label>
+      <input type="text" matInput formControlName="category">
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <mat-label>Brand</mat-label>
+      <input type="text" matInput formControlName="brand">
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <mat-label>Trader</mat-label>
+      <input type="text" matInput formControlName="trader">
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <mat-label>Employee</mat-label>
+      <input type="text" matInput formControlName="employee">
+    </mat-form-field>
+  </div>
+
+  
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <mat-label>Expiration Date</mat-label>
+      <input type="date" matInput formControlName="expirationDate">
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <mat-label>Amount Purchased</mat-label>
+      <input type="number" matInput formControlName="amountPurchased">
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <mat-label>Price Per Unit</mat-label>
+      <input type="number" matInput formControlName="pricePerUnit">
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <mat-label>Date Added</mat-label>
+      <input type="date" matInput formControlName="dateAdded">
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="primary" type="submit">Save Changes</button>
+</form>

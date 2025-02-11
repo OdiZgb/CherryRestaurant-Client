@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="row">
+        <div class="col-sm-4" *ngFor="let item of this.mainSeviceService.itemsList;">
+          <app-item-card 
+            [barcode]="item.barcode" 
+            [category]="item.categoryDTO?.name || ''"
+            [marka]="item.markaDTO?.name || ''"
+            [name]="item.name" 
+            [itemId]="item.id"  
+            [priceIn]="item.priceInDTO?.price"
+            [priceOut]="item.priceOutDTO?.price"
+            [tags]="item.tagsDTO ?? []"
+            [src]="getImageUrl(item)">
+          </app-item-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4" style="position: relative; overflow: auto; height: auto;">
+      <div style="position: sticky; top: 0;">
+        <app-item-list-filter></app-item-list-filter>
+      </div>
+    </div>
+  </div>
+</div>

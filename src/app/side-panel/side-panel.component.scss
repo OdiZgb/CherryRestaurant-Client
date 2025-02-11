@@ -1,0 +1,17 @@
+
+p {
+  color: black;
+  cursor: pointer;
+}
+
+h2.responsive-text {
+  font-size: 2vw;  // Adjust the value as needed
+  
+  @media only screen and (max-width: 400px) {
+    font-size: 4vw;  // Adjust the value as needed
+  }
+}
+
+mat-expansion-panel{
+  margin-bottom: 2px;
+}

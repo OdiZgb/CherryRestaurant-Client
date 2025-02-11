@@ -1,0 +1,25 @@
+.container {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .client-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .client-table th, .client-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .client-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+  

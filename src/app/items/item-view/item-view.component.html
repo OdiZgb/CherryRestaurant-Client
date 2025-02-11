@@ -1,0 +1,33 @@
+<div class="product-card">
+    <p-button styleClass="p-button-rounded p-button-danger" (onClick)="deleteItem()"><i class="pi pi-trash" style="font-size: 2rem"></i></p-button>
+    <p-button (onClick)="show()" styleClass="p-button-rounded"><i class="pi pi-pencil" style="font-size: 2rem"></i></p-button>
+  
+    <div class="product-image-barcode">
+      <img src="{{imageURL}}" alt="product image" class="product-image">
+      <app-barcode-generator [value]="itemDTO?.barcode || ''"></app-barcode-generator>
+    </div>
+  
+    <table class="vertical-table">
+      <tr>
+        <th>Item</th>
+        <td>{{itemDTO?.name}}</td>
+      </tr>
+      <tr>
+        <th>Category</th>
+        <td>{{itemDTO?.categoryDTO?.name}}</td>
+      </tr>
+      <tr>
+        <th>Brand</th>
+        <td>{{itemDTO?.markaDTO?.name}}</td>
+      </tr>
+      <tr>
+        <th>Price In</th>
+        <td>{{itemDTO?.priceInDTO?.price}}</td>
+      </tr>
+      <tr>
+        <th>Price Out</th>
+        <td>{{itemDTO?.priceOutDTO?.price}}</td>
+      </tr>
+    </table>
+  </div>
+  

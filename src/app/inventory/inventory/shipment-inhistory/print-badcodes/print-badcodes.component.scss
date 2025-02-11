@@ -1,0 +1,25 @@
+/* Regular screen display styles */
+.barcode-printer, .input-container, button {
+    display: block;
+  }
+  
+  /* Print media styles */
+  @media print {
+    body * {
+      visibility: hidden; /* Hide everything in the body initially */
+    }
+    .barcode-container, .barcode-container * {
+      visibility: visible; /* Only make the barcode container and its children visible */
+    }
+    .barcode-container {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%; /* Adjust width as necessary to fit your print layout */
+    }
+    svg, canvas {
+      max-width: 100%;
+      display: block; /* Ensure barcodes are not hidden or cut off */
+    }
+  }
+  

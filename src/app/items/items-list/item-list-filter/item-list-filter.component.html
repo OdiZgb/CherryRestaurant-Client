@@ -1,0 +1,35 @@
+<div class="page-container" style="display: grid; gap: 20px; float: right;">
+      <!-- Search Filter -->
+      <div style="margin-top: 15px;">
+        <input type="text" [formControl]="searchControl" placeholder="Search products by name" style="width: 100%; padding: 5px; font-size: 1em;">
+      </div>
+  <div class="filters" style="text-align: center; border: 1px solid #ccc; padding: 10px; justify-self: end;">
+    <form class="flex align-items-center gap-1" [formGroup]="formGroup" style="display: block;">
+      <h3 style="display: block;">Categories الفئات</h3>
+      <div *ngFor="let category of this.mainSeviceService.categories" style="display: flex; align-items: center; gap: 10px;">
+        <p-checkbox [value]="category.name" formControlName="{{category.name}}" inputId="{{category.id}}"></p-checkbox>
+        <label for="{{category.id}}">{{category.name}}</label>
+      </div>
+    </form>
+
+    <!-- Brands Filter -->
+    <form class="flex align-items-center gap-1" [formGroup]="formGroup" style="display: block;">
+      <h3 style="display: block;">Brands الماركات</h3>
+      <div *ngFor="let marka of this.mainSeviceService.markas" style="display: flex; align-items: center; gap: 10px;">
+        <p-checkbox [value]="marka.name" formControlName="{{marka.name}}" inputId="{{marka.id}}"></p-checkbox>
+        <label for="{{marka.id}}">{{marka.name}}</label>
+      </div>
+    </form>
+
+    <!-- Tags Filter -->
+    <form class="flex align-items-center gap-1" [formGroup]="formGroup" style="display: block;">
+      <h3 style="display: block;">Tags التاغات</h3>
+      <div *ngFor="let tag of this.mainSeviceService.tags" style="display: flex; align-items: center; gap: 10px;">
+        <p-checkbox [value]="tag.title" formControlName="{{tag.title}}" inputId="{{tag.id}}"></p-checkbox>
+        <label for="{{tag.id}}">{{tag.title}}</label>
+      </div>
+    </form>
+
+
+  </div>
+</div>

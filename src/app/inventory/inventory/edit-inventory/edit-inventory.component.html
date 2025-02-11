@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Edit Inventory</h1>
+<div mat-dialog-content>
+  <form [formGroup]="editForm">
+    <!-- Read-only fields -->
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" readonly>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <input matInput formControlName="category" readonly>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Brand</mat-label>
+      <input matInput formControlName="marka" readonly>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Trader</mat-label>
+      <input matInput formControlName="trader" readonly>
+    </mat-form-field>
+
+    <!-- Editable fields -->
+    <mat-form-field>
+      <mat-label>Expiration Date</mat-label>
+      <input matInput formControlName="expirationDate" type="date">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Amount Purchased</mat-label>
+      <input matInput formControlName="numberOfUnits" type="number">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Arrival Date</mat-label>
+      <input matInput formControlName="arrivalDate" type="date">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button mat-button (click)="saveChanges()" color="primary">Save</button>
+</div>

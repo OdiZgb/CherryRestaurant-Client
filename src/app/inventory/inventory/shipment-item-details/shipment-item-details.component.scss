@@ -1,0 +1,75 @@
+.product-container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.product-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+    margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 25px;
+    background-color: #ffffff;
+}
+
+.inventory-card {
+    background-color: #f9f9f9;
+}
+
+h2, h3 {
+    color: #555;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    color: #777;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.vertical-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.vertical-table th, .vertical-table td {
+    border: 1px solid #eee;
+    padding: 15px;
+}
+
+.vertical-table th {
+    background-color: #fafafa;
+    color: #555;
+    text-align: left;
+}
+
+.vertical-table td {
+    color: #777;
+    font-size: 18px;
+}
+.product-card.item-section {
+    display: flex;
+    flex-direction: row-reverse; /* To align the image to the right */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-data {
+    width: 70%;
+}
+
+.item-image {
+    width: 30%;
+    text-align: center; /* Center the image within its container */
+}
+
+.item-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* You can add this if you want rounded corners for the image */
+}

@@ -1,0 +1,23 @@
+<form [formGroup]="myForm">
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label for="markaName">Brand's Name (إسم الماركة)</mat-label>
+        <input type="text" matInput formControlName="markaName" placeholder="مثلا بيانكو">
+        <mat-error *ngIf="myForm.controls['markaName'].invalid || myForm.controls['markaName']?.touched">
+                  الحقل فارغ
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label for="markaDescription">Brand's Description (وصف الماركا)</mat-label>
+        <input type="text" matInput formControlName="markaDescription" placeholder="مثلا بيانكو">
+      </mat-form-field>
+  
+    </div>
+  
+  </form>
+  
+  <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+
+  <p-toast [position]="'bottom-right'"></p-toast>

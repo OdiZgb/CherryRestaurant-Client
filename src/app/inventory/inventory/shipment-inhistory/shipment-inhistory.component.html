@@ -1,0 +1,62 @@
+<div class="card">
+  <p-table [value]="inventories" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>product-shipment</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Brand</th>
+        <th>Tags</th> <!-- New header for tags column -->
+        <th>Trader</th>
+        <th>Employee</th>
+        <th>Expiration date</th>
+        <th>Amount Purchased</th>
+        <th>Price Purchased Per Unit</th>
+        <th>Price Purchased Total</th>
+        <th>Date Added</th>
+        <th>Edit</th> 
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-inventory>
+      <tr (click)="onRowClick(inventory)">
+        <td class="barcode-cell">
+          <button class="example-button-container" (mouseenter)="buttonHovered = true" (mouseleave)="buttonHovered = false" mat-mini-fab [class.red]="buttonHovered" (click)="handleButtonClick($event, calculateBarcode(inventory))">
+            <span class="material-symbols-outlined">print</span>
+          </button>
+          <app-barcode-generator [value]="calculateBarcode(inventory)"></app-barcode-generator>
+        </td>
+        <td>{{ inventory.itemDTO?.name }}</td>
+        <td>{{ inventory.itemDTO?.categoryDTO?.name }}</td>
+        <td>{{ inventory.itemDTO?.markaDTO?.name }}</td>
+        <td>
+          <!-- Display tags here -->
+          <span *ngFor="let tag of inventory.itemDTO?.tagsDTO">
+            {{ tag.title }}
+            <span *ngIf="tag !== inventory.itemDTO?.tagsDTO?.[inventory.itemDTO?.tagsDTO?.length - 1]">, </span>
+          </span>
+        </td>
+        <td>{{ inventory.traderDTO?.name }}</td>
+        <td>{{ inventory.employeeDTO?.user?.name }}</td>
+        <td style="color: red;">{{ inventory.expirationDate | date: 'MMM dd, yyyy' }}</td>
+        <td style="color: red;">{{ inventory.numberOfUnits }}</td>
+        <td>{{ inventory.priceInDTO?.price }}</td>
+        <td>{{ inventory.priceInDTO?.price *  inventory.numberOfUnits }}</td>
+        <td>{{ inventory.arrivalDate | date: 'MMM dd, yyyy' }}</td>
+
+        <td>
+          <button class="example-button-container" mat-mini-fab color="primary" (click)="editRow($event, inventory)">
+            <span class="material-symbols-outlined">edit</span>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<mat-paginator [length]="100"
+               [pageSize]="50"
+               [pageSizeOptions]="[5, 10, 25, 100]"
+               [pageIndex]="0"
+               (page)="handlePageEvent($event)"
+               aria-label="Select page">
+</mat-paginator>

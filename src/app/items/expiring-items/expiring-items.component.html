@@ -1,0 +1,38 @@
+<div class="card" *ngIf="!loading">
+    <p-table [value]="expiringInventories" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Product Shipment</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Brand</th>
+          <th>Trader</th>
+          <th>Employee</th>
+          <th>Expiration Date</th>
+          <th>Amount Purchased</th>
+          <th>Price Purchased Per Unit</th>
+          <th>Price Purchased Total</th>
+          <th>Date Added</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-inventory>
+        <tr>
+          <td>{{ inventory.itemDTO?.barcode }}-{{ inventory.barcode }}</td>
+          <td>{{ inventory.itemDTO?.name }}</td>
+          <td>{{ inventory.itemDTO?.categoryDTO?.name }}</td>
+          <td>{{ inventory.itemDTO?.markaDTO?.name }}</td>
+          <td>{{ inventory.traderDTO?.name }}</td>
+          <td>{{ inventory.employeeDTO?.user?.name }}</td>
+          <td style="color: red;">{{ inventory.expirationDate | date: 'MMM dd, yyyy' }}</td>
+          <td style="color: red;">{{ inventory.numberOfUnits }}</td>
+          <td>{{ inventory.priceInDTO?.price }}</td>
+          <td>{{ inventory.priceInDTO?.price * inventory.numberOfUnits }}</td>
+          <td>{{ inventory.arrivalDate | date: 'MMM dd, yyyy' }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div *ngIf="loading">
+    Loading...
+  </div>
+  

@@ -1,0 +1,58 @@
+<div style=" text-align: center;">{{inv.itemDTO?.barcode}}
+</div>
+<div class="product-container">
+
+    <div class="product-card item-section">
+        <div  >
+
+                <app-barcode-generator [value]="inv.itemDTO?.barcode || ''"></app-barcode-generator>
+
+        </div>
+        <div  class="item-image">
+            <img  src="{{itemImageURL}}">
+                 </div>
+        <div class="item-data">
+            <h2>Item Details</h2>
+            <table class="vertical-table">
+                <tr>
+                    <th>Name</th>
+                    <td>{{item?.name}}</td>
+                </tr>
+
+                <tr>
+                    <th>Brand</th>
+                    <td>{{item?.markaDTO?.name}}</td>
+                </tr>
+                <tr>
+                    <th>Category</th>
+                    <td>{{item?.categoryDTO?.name}}</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="product-card inventory-card">
+        <h3>Inventory Details</h3>
+        <table class="vertical-table">
+            <tr>
+                <th>Barcode</th>
+                <td>{{inv?.barcode}}</td>
+            </tr>
+            <tr>
+                <th>Number of Units</th>
+                <td>{{inv?.numberOfUnits}}</td>
+            </tr>
+            <tr>
+                <th>Expiration Date</th>
+                <td>{{inv?.expirationDate | date: 'MMM dd, yyyy'}}</td>
+            </tr>
+            <tr>
+                <th>Trader</th>
+                <td>{{trader?.name}}</td>
+            </tr>
+        </table>
+    </div>
+            <div class="item-image" style="text-align: center;width: 100%;">
+                <img style="width: 80%;" src="{{imageURL}}" alt="product image" class="product-image">
+            </div>
+</div>

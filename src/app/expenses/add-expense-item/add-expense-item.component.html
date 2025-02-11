@@ -1,0 +1,55 @@
+<form [formGroup]="myForm">
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <mat-label>Expense Category</mat-label>
+      <input type="text"
+             placeholder="Expense Category Name"
+             aria-label="Name"
+             matInput
+             formControlName="expenseCategoryName"
+             [formControl]="ExpenseCategoryController"
+             [matAutocomplete]="auto1">
+      <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete">
+        <mat-option *ngFor="let expenseCategory of expenseCategoryNames | keyvalue" [value]="expenseCategory.value">
+          {{ expenseCategory.value }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <mat-label>Employee</mat-label>
+      <input type="text"
+             placeholder="Employee Name"
+             aria-label="Name"
+             matInput
+             formControlName="employeeName"
+             [formControl]="EmployeeController"
+             [matAutocomplete]="auto2">
+      <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+        <mat-option *ngFor="let employee of employeeNames | keyvalue" [value]="employee.value">
+          {{ employee.value }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Cost </mat-label>
+        <input type="text" matInput formControlName="cost" placeholder="Cost">
+      </mat-form-field>
+  </div>
+
+  <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Expense Date</mat-label>
+        <input type="date" matInput formControlName="date" placeholder="Enter Expense Date">
+      </mat-form-field>
+  </div>
+
+  <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+</form>
+<p-toast [position]="'bottom-right'"></p-toast>
+ 

@@ -1,0 +1,12 @@
+tr:hover {
+    background-color: #f0f0f0; // Grey background on hover
+    cursor: pointer; // Cursor will appear as a hand, indicating the row is clickable
+  }
+  .example-button-container {
+    position: relative;
+}
+
+ 
+button.red:hover {
+    background-color: darkred;
+}

@@ -1,0 +1,12 @@
+<!-- src/app/tag/tag.component.html -->
+<h2>Manage Tags</h2>
+
+<form (ngSubmit)="onSubmit()">
+  <label for="tagName">Tag Name:</label>
+  <input type="text" id="tagName" [(ngModel)]="newTag.title" name="title" required />
+  <button type="submit">Add Tag</button>
+</form>
+
+<ul>
+  <li *ngFor="let tag of tags">{{ tag.title }}</li>
+</ul>

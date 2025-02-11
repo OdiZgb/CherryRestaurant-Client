@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="login-box">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" formControlName="username" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+      </form>
+    </div>
+  </div>
+<p-toast [position]="'bottom-right'"></p-toast>
+  

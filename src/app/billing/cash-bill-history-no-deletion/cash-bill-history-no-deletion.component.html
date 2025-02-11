@@ -1,0 +1,114 @@
+<p-toast></p-toast>
+<p-toolbar styleClass="mb-4 gap-2">
+  
+
+    <ng-template pTemplate="right">
+        <span class="p-input-icon-left ml-auto">
+            <i class="pi pi-search"></i>
+            <input 
+                pInputText 
+                type="text" 
+                (input)="filterData()" 
+                placeholder="Search..." 
+                [(ngModel)]="searchText" />
+        </span>
+    </ng-template>
+</p-toolbar>
+
+<p-accordion *ngIf="billKeys.length > 0">
+  <p-accordionTab *ngFor="let key of billKeys" [header]="'Bill ID: ' + key">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <strong>Client Name: </strong>{{ groupedBills[key][0].clientName }}
+      </div>
+      <div class="p-col-12">
+        <strong>Employee Name: </strong>{{ groupedBills[key][0].employeeName }}
+      </div>
+      <div class="p-col-12">
+        <strong>Requierd Price: </strong>{{ groupedBills[key][0].requierdPrice | currency: 'ILS':'symbol' }}
+      </div>
+      <div class="p-col-12">
+        <strong>Client Cash Payed: </strong>{{ groupedBills[key][0].clientCashPayed | currency: 'ILS':'symbol' }}
+      </div>
+      <div class="p-col-12">
+        <strong>Client Received: </strong>{{ groupedBills[key][0].clientRecived | currency: 'ILS':'symbol' }}
+      </div>
+      
+    </div>
+    <p-table
+      [value]="groupedBills[key]"
+      dataKey="id"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [loading]="loading"
+      [paginator]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [globalFilterFields]="['itemName', 'itemBarcode', 'itemCostIn', 'itemCostOut', 'employeeName', 'clientName', 'barcode']"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="itemName">
+            <div class="flex align-items-center">
+              Item Name
+              <p-sortIcon field="itemName"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="itemBarcode">
+            <div class="flex align-items-center">
+              Barcode
+              <p-sortIcon field="itemBarcode"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="itemCostIn">
+            <div class="flex align-items-center">
+              Cost In
+              <p-sortIcon field="itemCostIn"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="itemCostOut">
+            <div class="flex align-items-center">
+              Cost Out
+              <p-sortIcon field="itemCostOut"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="employeeName">
+            <div class="flex align-items-center">
+              Employee
+              <p-sortIcon field="employeeName"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="clientName">
+            <div class="flex align-items-center">
+              Client
+              <p-sortIcon field="clientName"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="barcode">
+            <div class="flex align-items-center">
+              Full Barcode
+              <p-sortIcon field="barcode"></p-sortIcon>
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-bill>
+        <tr>
+          <td>{{ bill.itemName }}</td>
+          <td>{{ bill.itemBarcode }}</td>
+          <td>{{ bill.itemCostIn | currency: 'ILS':'symbol' }}</td>
+          <td>{{ bill.itemCostOut | currency: 'ILS':'symbol' }}</td>
+          <td>{{ bill.employeeName }}</td>
+          <td>{{ bill.clientName }}</td>
+          <td>{{ bill.barcode }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">No items found for this bill.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-accordionTab>
+</p-accordion>
+<p *ngIf="billKeys.length === 0 && !loading">No cash bills found.</p>

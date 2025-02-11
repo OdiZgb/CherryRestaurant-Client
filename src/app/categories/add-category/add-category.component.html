@@ -1,0 +1,33 @@
+<form [formGroup]="myForm">
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <mat-label for="categoryName">Category Name (إسم الفئة)</mat-label>
+      <input type="text" matInput formControlName="categoryName" placeholder="...مثلاً  عصير أو قطن أو جهاز سحبة سيجارة">
+      <mat-error *ngIf="myForm.controls['categoryName'].invalid || myForm.controls['categoryName']?.touched">
+                الحقل فارغ
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <mat-label for="categoryDescription">Category Description (وصف الفئة)</mat-label>
+      <input type="text" matInput formControlName="categoryDescription" placeholder="مثلاً : أجهزة سحبة السيجارة تتميز بـ و بـ ...">
+      <mat-error *ngIf="myForm.controls['categoryDescription'].invalid || myForm.controls['categoryDescription'].touched">
+        الحقل فارغ
+      </mat-error>
+    </mat-form-field>
+
+  </div>
+
+  <div class="form-group" *ngFor="let control of controls?.controls; index as i" type="text">
+    <mat-form-field class="example-full-width">
+      <mat-label>Category feature (وصف الفئة)</mat-label>
+      <input matInput formControlName="{{'categoryFeatureController' + i}}" placeholder="سعة البطارية, أو حجم العصير..." />
+    </mat-form-field>
+  </div>
+
+    <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+
+</form>
+
+<p-toast [position]="'bottom-right'"></p-toast>

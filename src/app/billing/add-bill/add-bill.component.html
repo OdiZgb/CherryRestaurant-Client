@@ -1,0 +1,118 @@
+<div class="container" style="display: flex; flex-wrap: wrap; gap: 20px;">
+  <div style="flex: 1 1 35%;">
+    <form [formGroup]="myForm">
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Client (الزبون)</mat-label>
+          <input type="text" placeholder="Client Name (إسم التاجر)" aria-label="Name" matInput
+            formControlName="clientName" [formControl]="ClientController" [matAutocomplete]="auto2">
+          <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete"
+            (optionSelected)="onOptionSelectedClient($event)">
+            <mat-option *ngFor="let client of clientNames | keyvalue" [value]="client.value">
+              {{ client.value }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Employee (الموظف)</mat-label>
+          <input type="text" placeholder="Employee's Name (إسم الموظف)" aria-label="Name" matInput
+            formControlName="employeeName" [formControl]="EmployeeController" [matAutocomplete]="auto3">
+          <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete"
+            (optionSelected)="onOptionSelectedEmployee($event)">
+            <mat-option *ngFor="let employee of employeeNames | keyvalue" [value]="employee.value">
+              {{ employee.value }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Client Cash in الكاش المُستلم من الزبون</mat-label>
+          <input type="number" matInput formControlName="paiedPrice" placeholder="مثلاً 100">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Discount (الخصم)</mat-label>
+          <input type="number" matInput formControlName="discount" placeholder="مثلاً 10 شيكل">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Change back to client (الصرافة العائدة للزبون)</mat-label>
+          <input type="number" matInput formControlName="changeBack" placeholder="مثلاً 35 شيكل" readonly>
+        </mat-form-field>
+      </div>
+      
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+      <button type="submit" style="background-color: red; margin-left: 20px;" class="btn btn-danger" (click)="onRefund()">Refund</button>
+    </form>
+  </div>
+  <div style="flex: 1 1 45%;">
+    <form [formGroup]="myForm">
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Barcode (الباركود)</mat-label>
+          <input #barcodeInput [matAutocomplete]="auto1" matInput
+            aria-label="Name" formControlName="barcodeName" placeholder="Product Name (إسم المُنتج)" 
+            (keydown.enter)="onBarcodeScanned()" 
+            (focus)="openAutoComplete()"/>
+          <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete"
+            (optionSelected)="onOptionSelectedBarcode($event)">
+            <mat-option *ngFor="let item of itemNames | keyvalue" [value]="item.value.name">
+              {{ item.value.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </form>
+    <p-table [value]="Items" [tableStyle]="{ 'min-width': '100%' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Marka</th>
+          <th>Cost</th>
+          <th>Quantity</th>
+          <th>Tags</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+        <tr>
+          <td>{{ product.item.name }}</td>
+          <td>{{ product.item.categoryDTO.name }}</td>
+          <td>{{ product.item.markaDTO.name }}</td>
+          <td>{{ product.item.priceOutDTO.price }} ₪</td>
+          <td>
+            <input type="number" [(ngModel)]="product.quantity" disabled="true" (change)="updateQuantity(rowIndex, $event)" min="1">
+          </td>
+          <td *ngFor="let tag of product.item.tagsDTO" style="display: flex; align-items: center; gap: 10px;">{{ tag.title }}  </td>
+              <td *ngIf="product.item.tagsDTO.length<=0" style="display: flex; align-items: center; gap: 10px;"> </td>
+              <td>
+
+            <button (click)="removeItem(rowIndex)" class="btn-remove">X</button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <tr>
+          <td style="color: green;">Total السعر الكلي</td>
+          <td style="color: green;"> </td>
+          <td style="color: green;"> </td>
+          <td style="color: green;">{{ totalCostWithoutDiscount }} ₪</td>
+    
+          <td style="text-align: left; color: black;">{{ totalQuantity }}</td>
+          <td style="color: green;"> </td>
+          <td><button (click)="clearAll()" class="btn-remove-all">Clear All</button></td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-toast [position]="'bottom-right'"></p-toast>

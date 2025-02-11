@@ -1,0 +1,37 @@
+<form [formGroup]="myForm">
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Barcode (الباركود)</mat-label>
+        <input type="text"
+               placeholder="Product Name (إسم المُنتج)"
+               aria-label="Name"
+               matInput
+               formControlName="barcodeName"
+               [formControl]="ProductController"
+               [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+          <mat-option *ngFor="let item of itemNames | keyvalue" [value]="item.value">
+            {{ item.value }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      
+    </div>
+  
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Purchasing Price (سعر الشراء)</mat-label>
+        <input [disabled]="foundProduct" type="text" matInput formControlName="priceIn" placeholder="مثلا 60 شيكل">
+      </mat-form-field>
+    </div>
+    
+    <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Selling Price (سعر البيع)</mat-label>
+          <input [disabled]="foundProduct" type="text" matInput formControlName="priceOut" placeholder="مثلا 90 شيكل">
+        </mat-form-field>
+      </div>
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+  </form>
+  <p-toast [position]="'bottom-right'"></p-toast>

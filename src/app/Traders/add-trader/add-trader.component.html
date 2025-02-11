@@ -1,0 +1,29 @@
+<form [formGroup]="myForm">
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label for="traderName">Trader Name (إسم التاجر)</mat-label>
+        <input type="text" matInput formControlName="traderName" placeholder="...جودت">
+        <mat-error *ngIf="myForm.controls['traderName'].invalid || myForm.controls['traderName']?.touched">
+                  الحقل فارغ
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label for="traderNumber">Trader Name (رقم التاجر)</mat-label>
+        <input type="text" matInput formControlName="traderNumber" placeholder="...0594245425">
+        <mat-error *ngIf="myForm.controls['traderNumber'].invalid || myForm.controls['traderNumber']?.touched">
+                  الحقل فارغ
+        </mat-error>
+      </mat-form-field>
+    </div> 
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label for="traderEmail">Trader Email (إيميل التاجر)</mat-label>
+        <input type="text" matInput formControlName="traderEmail" placeholder="...jawdatt.1992@gmail.com">
+      </mat-form-field>
+    </div>  
+  <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+
+  </form>
+  <p-toast [position]="'bottom-right'"></p-toast>

@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="row">
+        <div href="#" class="col-sm-4" *ngFor="let marka of this.mainSeviceService.markas;">
+          <app-marka-card [name]="marka.name" [markaId]="marka.id" [src]="getImageUrl(marka)">
+          </app-marka-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

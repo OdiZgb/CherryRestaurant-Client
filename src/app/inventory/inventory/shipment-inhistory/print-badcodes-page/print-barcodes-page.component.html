@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="settings">
+    <h2>QR Code Generator Settings</h2>
+    <div class="form-group">
+      <label for="dpi">DPI:</label>
+      <input id="dpi" type="number" [(ngModel)]="dpi" (ngModelChange)="onSettingsChange()" [disabled]="settingsLocked" />
+    </div>
+    <div class="form-group">
+      <label for="width">Width (in inches):</label>
+      <input id="width" type="number" [(ngModel)]="widthInches" (ngModelChange)="onSettingsChange()" step="0.01" [disabled]="settingsLocked" />
+    </div>
+    <div class="form-group">
+      <label for="height">Height (in inches):</label>
+      <input id="height" type="number" [(ngModel)]="heightInches" (ngModelChange)="onSettingsChange()" step="0.01" [disabled]="settingsLocked" />
+    </div>
+    <div class="form-group">
+      <label for="layout">Print Layout:</label>
+      <select id="layout" [(ngModel)]="printLayout" (ngModelChange)="onLayoutChange()" [disabled]="settingsLocked">
+        <option value="single">Single Column</option>
+        <option value="double">Double Column</option>
+      </select>
+    </div>
+    <div class="form-group" *ngIf="printLayout === 'double'">
+      <label for="separation">Separation Space (in inches):</label>
+      <input id="separation" type="number" [(ngModel)]="separationSpace" (ngModelChange)="onSettingsChange()" step="0.01" [disabled]="settingsLocked" />
+    </div>
+    <div class="form-group">
+      <label for="titleFont">Title Font Size (px):</label>
+      <input id="titleFont" type="number" [(ngModel)]="titleFontSize" (ngModelChange)="onSettingsChange()" [disabled]="settingsLocked" />
+    </div>
+    <div class="form-group">
+      <label for="valueFont">Value Font Size (px):</label>
+      <input id="valueFont" type="number" [(ngModel)]="valueFontSize" (ngModelChange)="onSettingsChange()" [disabled]="settingsLocked" />
+    </div>
+    <button class="toggle-button" (click)="toggleSettingsLock()">
+      <i [class]="settingsLocked ? 'fas fa-lock' : 'fas fa-unlock'"></i>
+      {{ settingsLocked ? ' Unlock ' : ' Lock ' }}
+    </button>
+  </div>
+  <div class="preview">
+    <h2>QR Code Preview</h2>
+    <div #barcodeContainer class="barcode-container"></div>
+    <button class="print-button" (click)="printQRCode()">
+      <i class="fas fa-print"></i> Print QR Code
+    </button>
+  </div>
+</div>

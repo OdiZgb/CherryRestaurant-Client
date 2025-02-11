@@ -1,0 +1,16 @@
+.table-container {
+    /* Add any styling specific to the table here */
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    padding: 1rem; /* Add some padding around the image */
+  }
+  
+  .shipment-image {
+    max-width: 100%; /* Make sure the image doesn't overflow the container */
+    border-radius: 10px; /* Optional: Add rounded corners to the image */
+  }
+  

@@ -1,0 +1,26 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Set the height of the body and html to 100% */
+}
+
+.container-fluid {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Change height to min-height */
+}
+footer {
+  background-color: rgb(221, 57, 57);
+  border-width: 3px;
+  border-style: solid;
+  border-color: white;
+  height: 50px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  border-left: none;
+  border-bottom: none;
+  border-right: none;
+}

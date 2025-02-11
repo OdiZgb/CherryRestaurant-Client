@@ -1,0 +1,98 @@
+
+<div class="card">
+
+  <p-splitter [style]="{ height: '300px' }" styleClass="mb-5">
+
+      <ng-template pTemplate>
+
+          <div class="col flex align-items-center justify-content-center">
+
+            
+          </div>
+
+          <div class="row">
+            <p-table [value]="ShipmentAddedDTOs" [tableStyle]="{ 'min-width': '50rem' }">
+              <ng-template pTemplate="header">
+                  <tr>
+                      <th>Item</th>
+                      <th>Quantity</th>
+                      <th>Total Price </th>
+
+                      <th><p-button styleClass="p-button-rounded p-button-success" (onClick)="openDialog()" label="+"></p-button></th>
+                  </tr>
+
+              </ng-template>
+              <ng-template pTemplate="body" let-product let-index="rowIndex">
+                <tr>
+                  <td>{{product?.itemDTO?.name}}</td>
+                  <td>{{product?.numberOfUnits}}</td>
+                  <td>{{product?.numberOfUnits}}*{{product?.itemDTO?.priceInDTO?.price}}</td>
+                  <td><p-button styleClass="p-button-rounded p-button-danger" (onClick)="deleteItemFromTable(index)" label="-"></p-button></td>
+                </tr>
+              </ng-template>
+          </p-table>
+          </div>
+
+
+      </ng-template>
+      
+      <ng-template pTemplate>
+          <div class="col flex align-items-center justify-content-center">
+            <form [formGroup]="myForm">
+
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Trader (التاجر)</mat-label>
+                  <input type="text"
+                         placeholder="Trader Name (إسم التاجر)"
+                         aria-label="Name"
+                         matInput
+                         formControlName="traderName"
+                         [formControl]="TraderController"
+                         [matAutocomplete]="auto2">
+                  <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" (optionSelected)="onOptionSelectedTrader($event)">
+                    <mat-option *ngFor="let trader of traderNames | keyvalue" [value]="trader.value">
+                      {{ trader.value }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+            
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Employee (الموظف)</mat-label>
+                  <input type="text"
+                         placeholder="Employee's Name (إسم الموظف)"
+                         aria-label="Name"
+                         matInput
+                         formControlName="employeeName"
+                         [formControl]="EmployeeController"
+                         [matAutocomplete]="auto3">
+                  <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete" (optionSelected)="onOptionSelectedEmployee($event)">
+                    <mat-option *ngFor="let employee of employeeNames | keyvalue" [value]="employee.value">
+                      {{ employee.value }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Arrival Date تاريخ وصول الشحنة</mat-label>
+                      <input  type="date" matInput formControlName="arrivalDate" placeholder="مثلاً 2023-06-25">
+                    </mat-form-field>
+                </div>
+                <div  class="form-group">
+                  <mat-label for="itemImage">Shipment Paper (صورة / إثبات )</mat-label>
+                  <input #fileInput type="file" accept="image/*" capture (change)="onFileSelected($event)" >
+                  </div>
+
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+
+              </form>
+          </div>
+      </ng-template>
+  </p-splitter>
+</div>
+
+
+  <p-toast [position]="'bottom-right'"></p-toast>
