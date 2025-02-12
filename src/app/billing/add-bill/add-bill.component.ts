@@ -216,7 +216,7 @@ export class AddBillComponent implements OnInit, AfterViewInit {
       let items: ItemDTO[] = [];
       this.Items2.forEach(item => {
         for (let i = 0; i < item.quantity; i++) {
-          items.push({ id: item.item.id, barcode: item.fullBarcode } as ItemDTO);
+          items.push({ id: item.item.id, barcode: item.fullBarcode+"-001" } as ItemDTO);
         }
       });
 
@@ -337,15 +337,31 @@ export class AddBillComponent implements OnInit, AfterViewInit {
   }
 
   onOptionSelectedBarcode(event: any): void {
-    const selectedValue = event.option.value.name; // This will be the item's name
-    const selectedItem = Array.from(this.itemNames.values()).find(item => item.value === selectedValue);
-
-    if (selectedItem) {
-      if (selectedItem) {
-        this.ProductController.setValue(selectedItem.barcode);
-        this.onBarcodeScanned();
-         console.log(selectedItem,"selectedItem");
-    }}
+    const selectedName = event.option.value; // Get the selected combined name string
+    // Find the entry in itemNames where the name matches the selected value
+    const entries = Array.from(this.itemNames.entries());
+    const foundEntry = entries.find(([key, value]) => value.name === selectedName);
+    
+    if (foundEntry) {
+      const itemId = foundEntry[0];
+      const itemDTO = this.ItemDTOs.find(item => item.id === itemId);
+      
+      if (itemDTO) {
+        const existingItem = this.Items.find(item => item.item.id === itemDTO.id);
+        const fullBarcode = itemDTO.barcode || ""; // Use the actual barcode from the item
+        
+        if (existingItem) {
+          existingItem.quantity++;
+        } else {
+          this.Items.push({ item: itemDTO, quantity: 1, fullBarcode: fullBarcode });
+          this.Items2.push({ item: itemDTO, quantity: 1, fullBarcode: fullBarcode });
+        }
+        
+        this.calculateTotals();
+        this.ProductController.reset();
+        this.focusBarcodeInput();
+      }
+    }
   }
 
   onOptionSelectedClient(event: any): void {
@@ -448,16 +464,14 @@ export class AddBillComponent implements OnInit, AfterViewInit {
   }
 
   openPrintWindow(billData: any): void {
-    const qrMohammad = 'https://wa.me/qr/E4HEDWTXCX22E1';
-    const qrJawdat = 'https://wa.me/qr/XH7XYX45R7CUC1';
+    const qrMohammad = 'https://wa.me/qr/0593888641';
 
     const qrMohammadImage = `https://api.qrserver.com/v1/create-qr-code/?size=112x112&data=${encodeURIComponent(qrMohammad)}`;
-    const qrJawdatImage = `https://api.qrserver.com/v1/create-qr-code/?size=112x112&data=${encodeURIComponent(qrJawdat)}`;
-    const logoImage = '/assets/images/blackwhitelogo.png'; // Use relative path
+    const logoImage = '/assets/images/logoBlackAndWhite.png'; // Use relative path
 
     const printContent = `
       <div style="text-align: center; font-size: 75%;">
-        <h1>VAPE HUB Jericho</h1>
+        <h1>Cherry Restaurant & Cafe</h1>
         <img src="${logoImage}" alt="Vape Hub Logo" style="width: 100px; height: auto; margin-bottom: 15px;">
         <div style="display: flex; justify-content: space-between;">
           <div>
@@ -504,19 +518,15 @@ export class AddBillComponent implements OnInit, AfterViewInit {
 
           </div>
         </div>
-        <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-          <div>
-            <p>Mohammad</p>
-            <img style="width:45px;height:45px;" src="${qrJawdatImage}" alt="QR for Jawdat">
-            <p>0598 735 335</p>
-          </div>
-          <div>
-            <p>Jawdat</p>
-            <img style="width:45px;height:45px;" src="${qrMohammadImage}" alt="QR for Mohammad">
-            <p>0599 486 686</p>
-          </div>
-        </div>
+    <div style="margin-top: 15px; text-align: center;">
+      <div style="display: inline-block; text-align: center;">
+        <p style="margin: 2px 0;">0593-888-641</p>
+        <img style="width:45px;height:45px; margin: 0 auto 5px; display: block;" 
+             src="${qrMohammadImage}" 
+             alt="QR for Mohammad">
+        <p style="margin: 2px 0;">Cherry Restaurant & Cafe - Jericho</p>
       </div>
+    </div>
     `;
 
     const printWindow = window.open('', '_blank', 'width=600,height=600');
