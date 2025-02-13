@@ -262,67 +262,64 @@ openPrintWindow(billData: any): void {
   const logoImage = '/assets/images/blackwhitelogo.png'; // Use relative path
 
   const printContent = `
-    <div style="text-align: center; font-size: 75%;">
-      <h1>VAPE HUB Jericho</h1>
-      <img src="${logoImage}" alt="Vape Hub Logo" style="width: 100px; height: auto; margin-bottom: 15px;">
-      <div style="display: flex; justify-content: space-between;">
-        <div>
-          <p>Date: ${billData.date}</p>
-          <p>Time: ${billData.time}</p>
+   <div style="text-align: center; font-size: 75%;">
+        <h1>Cherry Restaurant & Cafe</h1>
+        <img src="${logoImage}" alt="Vape Hub Logo" style="width: 100px; height: auto; margin-bottom: 15px;">
+        <div style="display: flex; justify-content: space-between;">
+          <div>
+            <p>Date: ${billData.date}</p>
+            <p>Time: ${billData.time}</p>
+          </div>
+          <div>
+            <p>Employee: ${billData.employee}</p>
+            <p>Client: ${billData.client}</p>
+          </div>
         </div>
-        <div>
-          <p>Employee: ${billData.employee}</p>
-          <p>Client: ${billData.client}</p>
-        </div>
-      </div>
-      <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
-        <thead>
-          <tr>
-            <th style="border: 1px solid black; padding: 6px;">Item</th>
-            <th style="border: 1px solid black; padding: 6px;">Price</th>
-            <th style="border: 1px solid black; padding: 6px;">QTY</th>
-            <th style="border: 1px solid black; padding: 6px;">TPrice</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${billData.items.map((item: any) => `
+        <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+          <thead>
             <tr>
-              <td style="border: 1px solid black; padding: 6px;">${item.name}</td>
-              <td style="border: 1px solid black; padding: 6px;">${item.price}</td>
-              <td style="border: 1px solid black; padding: 6px;">${item.quantity}</td>
-              <td style="border: 1px solid black; padding: 6px;">${item.price*item.quantity}</td>
+              <th style="border: 1px solid black; padding: 6px;">Item</th>
+              <th style="border: 1px solid black; padding: 6px;">Price</th>
+              <th style="border: 1px solid black; padding: 6px;">QTY</th>
+              <th style="border: 1px solid black; padding: 6px;">TPrice</th>
             </tr>
-          `).join('')}
-        </tbody>
-      </table>
-      <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-        <div>
-          <p>Total QTY: ${billData.totalQuantity}</p>
-          <p>Received: ${billData.moneyReceived}₪</p>
-          <p>Residual: ${billData.moneyToGive}₪</p>
-          <p>Debt: ${billData.debt}</p>
-        </div>
-        <div>
-          <p>Total Price: ${billData.totalPrice}₪</p>
-          <p>Discount: ${billData.discount}₪</p>
-          <p>Final Price: ${this.totalCostWithDiscount}₪</p>
+          </thead>
+          <tbody>
+            ${billData.items.map((item: any) => `
+              <tr>
+                <td style="border: 1px solid black; padding: 6px;">${item.name}</td>
+                <td style="border: 1px solid black; padding: 6px;">${item.price}</td>
+                <td style="border: 1px solid black; padding: 6px;">${item.quantity}</td>
+                <td style="border: 1px solid black; padding: 6px;">${item.price*item.quantity}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+        <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+          <div>
+            <p>Total QTY: ${billData.totalQuantity}</p>
+            <p>Received: ${billData.moneyReceived}₪</p>
+            <p>Residual: ${billData.moneyToGive}₪</p>
+            <p>Debt: ${billData.debt}</p>
+          </div>
+          <div>
+            <p>Total Price: ${billData.totalPrice}₪</p>
+            <p>Discount: ${billData.discount}₪</p>
+            <p>Final Price: ${this.totalCostWithDiscount}₪</p>
 
 
+          </div>
         </div>
-      </div>
-      <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-        <div>
-          <p>Mohammad</p>
-          <img style="width:45px;height:45px;" src="${qrJawdatImage}" alt="QR for Jawdat">
-          <p>0598 735 335</p>
-        </div>
-        <div>
-          <p>Jawdat</p>
-          <img style="width:45px;height:45px;" src="${qrMohammadImage}" alt="QR for Mohammad">
-          <p>0599 486 686</p>
-        </div>
+    <div style="margin-top: 15px; text-align: center;">
+      <div style="display: inline-block; text-align: center;">
+        <p style="margin: 2px 0;">0593-888-641</p>
+        <img style="width:45px;height:45px; margin: 0 auto 5px; display: block;" 
+             src="${qrMohammadImage}" 
+             alt="QR for Mohammad">
+        <p style="margin: 2px 0;">Cherry Restaurant & Cafe - Jericho</p>
       </div>
     </div>
+    
   `;
 
   const printWindow = window.open('', '_blank', 'width=600,height=600');
