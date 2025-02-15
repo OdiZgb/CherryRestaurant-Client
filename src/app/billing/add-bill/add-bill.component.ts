@@ -75,9 +75,9 @@ export class AddBillComponent implements OnInit, AfterViewInit {
   }
   private saveCurrentTableOrder(): void {
     const currentOrder: TableOrder = {
-      items: this.Items.map(item => ({...item})), // Clone items
+      items: this.Items.map(item => ({...item})),
       client: this.ClientController.value,
-      employee: this.EmployeeController.value,
+      employee: this.EmployeeController.value,  // Will always be logged-in user
       discount: this.DiscountController.value || 0,
       paiedPrice: this.myForm.get('paiedPrice')?.value,
       changeBack: Number(this.ChangeBackController.value)
@@ -91,7 +91,8 @@ export class AddBillComponent implements OnInit, AfterViewInit {
       // Clone the items to break reference
       this.Items = order.items.map(item => ({...item}));
       this.ClientController.setValue(order.client);
-      this.EmployeeController.setValue(order.employee);
+      
+      // Keep the employee from storage instead of loaded order
       this.DiscountController.setValue(order.discount);
       this.myForm.patchValue({
         paiedPrice: order.paiedPrice,
@@ -101,6 +102,7 @@ export class AddBillComponent implements OnInit, AfterViewInit {
     }
   }
   ngOnInit(): void {
+    this.setEmployeeFromStorage();  // Moved to top
     this.loadTableOrders();
     this.initializeData();
     this.initializeForm();
@@ -133,20 +135,17 @@ export class AddBillComponent implements OnInit, AfterViewInit {
     this.tableOrders.set(this.selectedTable, {
       items: [],
       client: null,
-      employee: null,
       discount: 0,
       paiedPrice: 0,
       changeBack: 0
-    });
+    } as unknown as TableOrder);
     this.saveTableOrders();
     this.Items = [];
-    this.myForm.reset();
     this.DiscountController.setValue(0);
   }
   
   ngAfterViewInit(): void {
     this.focusBarcodeInput();
-    this.setEmployeeFromStorage();
   }
   initializeData(): void {
     this.mainsService.clientService.getAllClients$().subscribe(x => {
@@ -241,19 +240,24 @@ export class AddBillComponent implements OnInit, AfterViewInit {
     });
   }
 
-  setEmployeeFromStorage(): void {
+  private setEmployeeFromStorage(): void {
     this.username = localStorage.getItem('username');
     if (this.username) {
       this.mainsService.employeeService.getAllEmployees$().subscribe(x => {
         const employee = x.find(e => e.user.name === this.username);
         if (employee) {
+          // Set the value and disable the control
           this.EmployeeController.setValue(employee.user.name);
           this.EmployeeController.disable();
+          
+          // Force update the form value
+          this.myForm.patchValue({
+            employeeName: employee.user.name
+          });
         }
       });
     }
   }
-
   onBarcodeScanned(): void {
     const bar = this.ProductController.value;
     const barcodePrefix = bar?.substring(0, 3);
