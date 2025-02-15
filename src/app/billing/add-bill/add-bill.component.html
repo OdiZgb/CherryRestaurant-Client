@@ -1,4 +1,25 @@
+<div class="table-manager">
+  <h3 class="header">Currently Managing: Table {{ selectedTable }}</h3>
+  <div class="table-grid">
+    <button 
+      *ngFor="let table of tableNumbers" 
+      [class.active]="table === selectedTable"
+      [class.has-items]="(tableOrders.get(table)?.items?.length || 0) > 0" 
+      (click)="onTableChange(table)"
+      class="table-button"
+    >
+      <div class="table-content">
+        <i class="fas fa-utensils icon"></i>
+        <div class="table-number" style="color: red;">{{ table }}</div>
+
+
+      </div>
+    </button>
+  </div>
+</div>
+
 <div class="container" style="display: flex; flex-wrap: wrap; gap: 20px;">
+
   <div style="flex: 1 1 35%;">
     <form [formGroup]="myForm">
       <div class="form-group">

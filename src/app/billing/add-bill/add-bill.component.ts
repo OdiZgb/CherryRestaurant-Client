@@ -12,6 +12,16 @@ import { ClientDTO } from 'src/app/DTOs/ClientDTO';
 import { forkJoin, map } from 'rxjs';
 import { TagService } from 'src/app/services/TagService/tag.service';
 
+interface TableOrder {
+  items: { item: ItemDTO, quantity: number, fullBarcode: string }[];
+  client: string | null;
+  employee: string | null;
+  discount: number;
+  paiedPrice: number;
+  changeBack: number;
+}
+const TABLE_NUMBERS = Array.from({length: 22}, (_, i) => i + 1);
+
 @Component({
   selector: 'app-add-bill',
   templateUrl: './add-bill.component.html',
@@ -35,11 +45,14 @@ export class AddBillComponent implements OnInit, AfterViewInit {
   employeeDTOs: EmployeeDTO[] = [];
   foundProduct: boolean = false;
   Items: { item: ItemDTO, quantity: number, fullBarcode: string }[] = [] ; // Updated to include quantity and full barcode
-  Items2: { item: ItemDTO, quantity: number, fullBarcode: string }[] = [] ; // Updated to include quantity and full barcode
   totalCostWithoutDiscount: number = 0; // This will not change with discount
   totalCostWithDiscount: number = 0;  // This will apply the discount
   totalQuantity: number = 0; // Added to track total quantity
   username: string | null = null;
+  // Table management
+  selectedTable: number = 1;
+  tableOrders = new Map<number, TableOrder>();
+  tableNumbers = TABLE_NUMBERS;
 
   @ViewChild('barcodeInput') barcodeInput!: ElementRef;
   @ViewChild(MatAutocompleteTrigger) auto1Trigger!: MatAutocompleteTrigger;
@@ -54,13 +67,83 @@ export class AddBillComponent implements OnInit, AfterViewInit {
     private cdr: ChangeDetectorRef,
     
   ) { }
-
+  onTableChange(newTable: number): void {
+    this.saveCurrentTableOrder();
+    this.selectedTable = newTable;
+    this.loadCurrentTableOrder();
+    this.focusBarcodeInput();
+  }
+  private saveCurrentTableOrder(): void {
+    const currentOrder: TableOrder = {
+      items: this.Items.map(item => ({...item})), // Clone items
+      client: this.ClientController.value,
+      employee: this.EmployeeController.value,
+      discount: this.DiscountController.value || 0,
+      paiedPrice: this.myForm.get('paiedPrice')?.value,
+      changeBack: Number(this.ChangeBackController.value)
+    };
+    this.tableOrders.set(this.selectedTable, currentOrder);
+    this.saveTableOrders();
+  }
+  private loadCurrentTableOrder(): void {
+    const order = this.tableOrders.get(this.selectedTable);
+    if (order) {
+      // Clone the items to break reference
+      this.Items = order.items.map(item => ({...item}));
+      this.ClientController.setValue(order.client);
+      this.EmployeeController.setValue(order.employee);
+      this.DiscountController.setValue(order.discount);
+      this.myForm.patchValue({
+        paiedPrice: order.paiedPrice,
+        changeBack: order.changeBack
+      });
+      this.calculateTotals();
+    }
+  }
   ngOnInit(): void {
+    this.loadTableOrders();
     this.initializeData();
     this.initializeForm();
     this.setupCashToReturnUpdater();
   }
+  private loadTableOrders(): void {
+    const savedOrders = localStorage.getItem('tableOrders');
+    if (savedOrders) {
+      this.tableOrders = new Map(JSON.parse(savedOrders));
+    } else {
+      TABLE_NUMBERS.forEach(table => {
+        this.tableOrders.set(table, {
+          items: [],
+          client: null,
+          employee: null,
+          discount: 0,
+          paiedPrice: 0,
+          changeBack: 0
+        });
+      });
+      this.saveTableOrders();
+    }
+  }
+  private saveTableOrders(): void {
+    localStorage.setItem('tableOrders', JSON.stringify([...this.tableOrders]));
+  }
 
+  // Modified clearAll method
+  clearAll(): void {
+    this.tableOrders.set(this.selectedTable, {
+      items: [],
+      client: null,
+      employee: null,
+      discount: 0,
+      paiedPrice: 0,
+      changeBack: 0
+    });
+    this.saveTableOrders();
+    this.Items = [];
+    this.myForm.reset();
+    this.DiscountController.setValue(0);
+  }
+  
   ngAfterViewInit(): void {
     this.focusBarcodeInput();
     this.setEmployeeFromStorage();
@@ -173,20 +256,27 @@ export class AddBillComponent implements OnInit, AfterViewInit {
 
   onBarcodeScanned(): void {
     const bar = this.ProductController.value;
-    const barcodeValue = this.ProductController.value;
-    const barcodePrefix = barcodeValue?.substring(0, 3);
-    const foundItemByBarcode = this.ItemDTOs.find(s => s.barcode === barcodePrefix);
-
-    if (foundItemByBarcode != null) {
-      const existingItem = this.Items.find(item => item.item.id === foundItemByBarcode.id);
-      this.Items2.push({ item: foundItemByBarcode, quantity: 1, fullBarcode: bar || "" });
-      
-      if (existingItem) {
-        existingItem.quantity++;
+    const barcodePrefix = bar?.substring(0, 3);
+    const foundItem = this.ItemDTOs.find(s => s.barcode === barcodePrefix);
+  
+    if (foundItem) {
+      const existingIndex = this.Items.findIndex(item => 
+        item.item.id === foundItem.id && 
+        item.fullBarcode === bar
+      );
+  
+      if (existingIndex > -1) {
+        // Update existing item
+        this.Items[existingIndex].quantity++;
       } else {
-        this.Items.push({ item: foundItemByBarcode, quantity: 1, fullBarcode: bar || "" });
+        // Add new item
+        this.Items.push({ 
+          item: foundItem, 
+          quantity: 1, 
+          fullBarcode: bar || "" 
+        });
       }
-
+  
       this.calculateTotals();
       this.ProductController.reset();
       this.focusBarcodeInput();
@@ -214,9 +304,12 @@ export class AddBillComponent implements OnInit, AfterViewInit {
       const discountValue = this.myForm.get('discount')?.value;
 
       let items: ItemDTO[] = [];
-      this.Items2.forEach(item => {
+      this.Items.forEach(item => {
         for (let i = 0; i < item.quantity; i++) {
-          items.push({ id: item.item.id, barcode: item.fullBarcode+"-001" } as ItemDTO);
+          items.push({ 
+            id: item.item.id, 
+            barcode: item.fullBarcode+"-001" 
+          } as ItemDTO);
         }
       });
 
@@ -241,6 +334,7 @@ export class AddBillComponent implements OnInit, AfterViewInit {
         x => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Bill has been added' });
 
+      
           // Prepare data for printing
           const billData = {
             date: new Date().toLocaleDateString(),
@@ -260,7 +354,8 @@ export class AddBillComponent implements OnInit, AfterViewInit {
             moneyToGive: changeBackValue,
             debt: ''  // Add debt if any
           };
-
+          this.clearAll();
+        
           // Open print window
           this.openPrintWindow(billData);
         },
@@ -279,9 +374,12 @@ export class AddBillComponent implements OnInit, AfterViewInit {
       const discountValue = this.myForm.get('discount')?.value;
 
       let items: ItemDTO[] = [];
-      this.Items2.forEach(item => {
+      this.Items.forEach(item => {
         for (let i = 0; i < item.quantity; i++) {
-          items.push({ id: item.item.id, barcode: item.fullBarcode } as ItemDTO);
+          items.push({ 
+            id: item.item.id, 
+            barcode: item.fullBarcode+"-001" 
+          } as ItemDTO);
         }
       });
 
@@ -354,7 +452,6 @@ export class AddBillComponent implements OnInit, AfterViewInit {
           existingItem.quantity++;
         } else {
           this.Items.push({ item: itemDTO, quantity: 1, fullBarcode: fullBarcode });
-          this.Items2.push({ item: itemDTO, quantity: 1, fullBarcode: fullBarcode });
         }
         
         this.calculateTotals();
@@ -440,18 +537,10 @@ export class AddBillComponent implements OnInit, AfterViewInit {
 
   removeItem(index: number): void {
     this.Items.splice(index, 1);
-    this.Items2.splice(index, 1);
     this.calculateTotals();
   }
 
-  clearAll(): void {
-    this.Items = [];
-    this.Items2 = [];
-    this.myForm.get('clientName')?.reset();
-    this.myForm.get('paiedPrice')?.reset();
-    this.myForm.get('discount')?.reset();  // Clear the discount field
-    this.calculateTotals();
-  }
+ 
 
   updateQuantity(index: number, event: any): void {
     const newQuantity = Number(event.target.value);
