@@ -17,7 +17,8 @@
 
             <mat-form-field appearance="outline" class="mb-3" *ngIf="selectedYear && selectedMonth !== null">
                 <mat-label>Select Date</mat-label>
-                <input matInput [matDatepicker]="datePicker" [formControl]="selectedDate" (dateChange)="filterData()" placeholder="MM/DD/YYYY">
+                <input matInput [matDatepicker]="datePicker" [formControl]="selectedDate" 
+                    (dateChange)="filterData()" placeholder="MM/DD/YYYY">
                 <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
                 <mat-datepicker #datePicker></mat-datepicker>
             </mat-form-field>
@@ -25,7 +26,8 @@
             <mat-form-field appearance="outline" class="mb-3">
                 <mat-label>Employee (الموظف)</mat-label>
                 <input type="text" placeholder="Employee's Name (إسم الموظف)" aria-label="Name" matInput
-                    formControlName="employeeName" [formControl]="EmployeeController" [matAutocomplete]="auto3" (input)="filterData()">
+                    formControlName="employeeName" [formControl]="EmployeeController" 
+                    [matAutocomplete]="auto3" (input)="filterData()">
                 <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete" 
                     (optionSelected)="selectedEmployee = $event.option.value; filterData()">
                     <mat-option *ngFor="let employee of employeeNames | keyvalue" [value]="employee.value">
@@ -36,7 +38,8 @@
         </ng-template>
     </p-toolbar>
 
-    <p-table [value]="payLates" [tableStyle]="{ 'min-width': '50rem' }">
+    <!-- Table for displaying filtered pay laters -->
+    <p-table [value]="filteredPayLates" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
             <tr>
                 <th>اسم الموظف</th>
@@ -54,18 +57,17 @@
             </tr>
         </ng-template>
     </p-table>
-    <div style="float: right;" class="total-container">
 
+    <!-- Total amount section -->
+    <div style="float: right;" class="total-container">
+        <p-table [value]="[{}]" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>المجموع</th>
+                    <th><strong>{{ getTotalAmount() }}</strong></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+        </p-table>
     </div>
-    <p-table [value]="payLates" [tableStyle]="{ 'min-width': '50rem' }">
-        <ng-template pTemplate="header">
-            <tr>
-                <th> المجموع</th>
-                 
-                <th><strong> {{ getTotalAmount() }}</strong>  </th> 
-            <th></th>
-            </tr>
-        </ng-template>
- 
-    </p-table>
 </div>
