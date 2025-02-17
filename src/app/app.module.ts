@@ -98,6 +98,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { PaylaterComponent } from './employees/paylater/paylater.component';
+import { DisplayPaylatersComponent } from './employees/display-paylaters/display-paylaters.component';
 
 @NgModule({
   declarations: [
@@ -153,7 +155,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     CashBillHistoryNoDeletionComponent,
     EditInventoryDialogComponent,
     EditInventoryComponent,
-    TagComponent
+    TagComponent,
+    PaylaterComponent,
+    DisplayPaylatersComponent
   ],
   imports: [
     BrowserModule,

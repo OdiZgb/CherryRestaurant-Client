@@ -1,0 +1,23 @@
+
+<div class="card">
+    <p-table [value]="payLates" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>اسم الموظف</th>
+                <th>نوع الباي لاتر</th>
+                <th>مبلغ الباي لاتر</th>
+                <th>تاريخ التسجيل</th>
+
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-empl>
+            <tr>
+                <td>{{ empl.employee.user.name }}</td>
+                <td>{{  empl.note }}</td>
+                <td>{{  empl.value }}</td>
+                <td>{{  empl.date }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

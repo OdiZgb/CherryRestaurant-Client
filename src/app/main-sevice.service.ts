@@ -13,6 +13,7 @@ import { BillsService } from './services/bills/bills.service';
 import { ClientService } from './services/Clients/client.service';
 import { TagDTO } from './DTOs/TagDTO';
 import { TagService } from './services/TagService/tag.service';
+import { PayLaterDTO } from './DTOs/PayLaterDTO';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,6 +33,7 @@ export class MainSeviceService implements OnInit{
   traders = of<TraderDTO[]>();
   employees = new Observable<EmployeeDTO[]>();
   salaries = new Observable<SalaryDTO[]>();
+  paylaters = new Observable<PayLaterDTO[]>();
   constructor(public tradersService: TradersService,public billingService: BillsService,public tagService:TagService, public clientService: ClientService,public employeeService :EmployeeService, public store$:AppStore) {
     this.traders = this.store$.select(x => x.traders);
      this.setUpObservables();
@@ -54,6 +56,10 @@ export class MainSeviceService implements OnInit{
       this.employees=this.store$.select(x=>x.employees);
     });
     this.employeeService.getAllSalaries$().subscribe(x=>{
+      this.store$.setState(state => ({ ...state, salaries:x }));
+      this.salaries=this.store$.select(x=>x.salaries);
+    });
+    this.employeeService.getAllPayLaters$().subscribe(x=>{
       this.store$.setState(state => ({ ...state, salaries:x }));
       this.salaries=this.store$.select(x=>x.salaries);
     });

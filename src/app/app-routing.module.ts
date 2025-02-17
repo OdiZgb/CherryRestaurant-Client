@@ -37,6 +37,8 @@ import { CashBillHistoryComponent } from './billing/cash-bill-history/cash-bill-
 import { CashBillHistoryNoDeletionComponent } from './billing/cash-bill-history-no-deletion/cash-bill-history-no-deletion.component';
 import { PricesComponent } from './prices/prices.component';
 import { TagComponent } from './items/Tags/tag-management/tag.component';
+import { PaylaterComponent } from './employees/paylater/paylater.component';
+import { DisplayPaylatersComponent } from './employees/display-paylaters/display-paylaters.component';
 
 const routes: Routes = [
   {path:'',component:AddBillComponent},
@@ -63,6 +65,8 @@ const routes: Routes = [
   {path:'inventory/traders/add',component:AddTraderComponent},
   {path:'employees',component:EmployeesComponent},
   {path:'employees/add',component:AddEmployeeComponent},
+  {path:'employees/paylater/add',component:PaylaterComponent},
+  {path:'employees/paylater/display',component:DisplayPaylatersComponent},
   {path:'employees/salaries/add',component:AddSalariesComponent},
   {path:'employees/salaries/display',component:DisplaySalariesComponent},
   {path:'expenses/add',component:AddExpensesComponent},
