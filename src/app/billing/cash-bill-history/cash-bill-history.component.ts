@@ -259,7 +259,7 @@ openPrintWindow(billData: any): void {
 
   const qrMohammadImage = `https://api.qrserver.com/v1/create-qr-code/?size=112x112&data=${encodeURIComponent(qrMohammad)}`;
   const qrJawdatImage = `https://api.qrserver.com/v1/create-qr-code/?size=112x112&data=${encodeURIComponent(qrJawdat)}`;
-  const logoImage = '/assets/images/blackwhitelogo.png'; // Use relative path
+  const logoImage = '/assets/images/logoBlackAndWhite.png'; // Use relative path
 
   const printContent = `
    <div style="text-align: center; font-size: 75%;">
@@ -352,4 +352,96 @@ openPrintWindow(billData: any): void {
     printWindow.document.close();
   }
 }
+openPrintWindowCash(): void {
+  const logoImage = '/assets/images/logoBlackAndWhite.png'; // Use relative path
+
+  // Get the necessary values for the print content
+  const totalCostIn = this.getTotalCostIn();
+  const totalPrice = this.getTotalPrice();
+  const totalProfit = this.getTotalProfit();
+
+  // Get the selected filter values
+  const selectedYear = this.selectedYear !== null ? this.selectedYear : 'N/A';
+  const selectedMonth = this.selectedMonth !== null && this.selectedMonth >= 0 ? this.months[this.selectedMonth] : 'N/A';
+  
+  // Get selectedDate as a formatted string if it's a valid date
+  const selectedDate = this.selectedDate.value && typeof this.selectedDate.value.format === 'function' 
+    ? this.selectedDate.value.format('MM/DD/YYYY') 
+    : this.selectedDate.value ? this.selectedDate.value.toString() : 'N/A';
+
+  // Get selectedEmployee value from the EmployeeController
+  const selectedEmployee = this.EmployeeController.value || 'N/A';
+
+  // Dynamically build the print content
+  const printContent = `
+    <table class="p-datatable p-datatable-responsive">
+      <tr>
+        <td><strong>Total Cost In:</strong></td>
+        <td>${totalCostIn.toFixed(2)} ILS</td>
+      </tr>
+      <tr>
+        <td><strong>Total Cost Out:</strong></td>
+        <td>${totalPrice.toFixed(2)} ILS</td>
+      </tr>
+      <tr>
+        <td><strong>Total Profit:</strong></td>
+        <td>${totalProfit.toFixed(2)} ILS</td>
+      </tr>
+    </table>
+
+    <table class="p-datatable p-datatable-responsive" style="margin-top: 20px;">
+      <tr>
+        <td><strong>Selected Year:</strong></td>
+        <td>${selectedYear}</td>
+      </tr>
+      <tr>
+        <td><strong>Selected Month:</strong></td>
+        <td>${selectedMonth}</td>
+      </tr>
+      <tr>
+        <td><strong>Selected Date:</strong></td>
+        <td>${selectedDate}</td>
+      </tr>
+      <tr>
+        <td><strong>Employee:</strong></td>
+        <td>${selectedEmployee}</td>
+      </tr>
+    </table>
+  `;
+
+  const printWindow = window.open('', '_blank', 'width=600,height=600');
+  if (printWindow) {
+    printWindow.document.open();
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Print Bill</title>
+          <style>
+            table, th, td {
+              border: 1px solid black;
+              border-collapse: collapse;
+            }
+            th, td {
+              padding: 6px;
+              text-align: left;
+            }
+            img {
+              display: block;
+              margin: 0 auto;
+            }
+          </style>
+        </head>
+        <body onload="window.print()">
+          <img src="${logoImage}" alt="Logo" />
+          ${printContent}
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
+  }
 }
+
+}
+
+
+

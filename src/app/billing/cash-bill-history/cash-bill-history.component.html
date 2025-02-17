@@ -86,6 +86,9 @@
     <td>{{ getTotalProfit() | currency: 'ILS':'symbol' }}</td>
   </tr>
 </table>
+
+<button pButton label="Print" class="p-button-info" icon="pi pi-print" 
+(click)="openPrintWindowCash()"></button>
 <p-accordion *ngIf="billKeys.length > 0">
   <p-accordionTab 
     *ngFor="let key of billKeys" 
