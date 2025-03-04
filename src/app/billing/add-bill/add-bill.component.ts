@@ -20,7 +20,7 @@ interface TableOrder {
   paiedPrice: number;
   changeBack: number;
 }
-const TABLE_NUMBERS = Array.from({length: 22}, (_, i) => i + 1);
+const TABLE_NUMBERS = Array.from({length: 30}, (_, i) => i + 1);
 
 @Component({
   selector: 'app-add-bill',
@@ -369,61 +369,110 @@ export class AddBillComponent implements OnInit, AfterViewInit {
       );
     }
   }
-  PrintOrders(): void {
-      const clientValue = this.myForm.get('clientName')?.value;
-      const employeeValue = this.myForm.get('employeeName')?.value;
-      const changeBackValue = this.myForm.get('changeBack')?.value;
-      const paiedPriceValue = this.myForm.get('paiedPrice')?.value;
-      const discountValue = this.myForm.get('discount')?.value;
+  
+  PrintOrdersClient(): void {
+    const clientValue = this.myForm.get('clientName')?.value;
+    const employeeValue = this.myForm.get('employeeName')?.value;
+   
 
-      let items: ItemDTO[] = [];
-      this.Items.forEach(item => {
-        for (let i = 0; i < item.quantity; i++) {
-          items.push({ 
-            id: item.item.id, 
-            barcode: item.fullBarcode+"-001" 
-          } as ItemDTO);
-        }
-      });
+    let items: ItemDTO[] = [];
+    this.Items.forEach(item => {
+      for (let i = 0; i < item.quantity; i++) {
+        items.push({ 
+          id: item.item.id, 
+          barcode: item.fullBarcode+"-001" 
+        } as ItemDTO);
+      }
+    });
 
-      let billDTO: BillDTO = {
-        clientId: this.clientDTOs.find(c => c.name === clientValue)?.id || -1,
-        employeeId: this.employeeDTOs.find(e => e.user.name === employeeValue)?.id || -1,
-        requierdPrice: this.totalCostWithDiscount,  // Use the total with discount here
-        paiedPrice: Number.parseInt(paiedPriceValue),
-        discount: this.totalCostWithoutDiscount-this.totalCostWithDiscount,
-        exchangeRepaied: Number.parseInt(changeBackValue),
-        id: 0,
-        clientDebtId: 0,
-        completed: false,
-        time: '',
-        employee: null,
-        client: null,
-        clientDebt: null,
-        items: items
-      };
-      const billData = {
-        date: new Date().toLocaleDateString(),
-        time: new Date().toLocaleTimeString(),
-        employee: employeeValue,
-        client: clientValue,
-        items: this.Items.map(item => ({
-          name: item.item.name,
-          price: item.item.priceOutDTO?.price,
-          quantity: item.quantity,
-          notes: ''  // Add notes if any
-        })),
-        totalPrice: this.totalCostWithoutDiscount,  // Display the total without discount
-        totalQuantity: this.totalQuantity,
-        discount: discountValue || '',  // Added discount to the bill data
-        moneyReceived: paiedPriceValue,
-        moneyToGive: changeBackValue,
+    let billDTO: BillDTO = {
+      clientId: this.clientDTOs.find(c => c.name === clientValue)?.id || -1,
+      employeeId: this.employeeDTOs.find(e => e.user.name === employeeValue)?.id || -1,
+      requierdPrice: this.totalCostWithDiscount,  // Use the total with discount here
+       discount: this.totalCostWithoutDiscount-this.totalCostWithDiscount,
+       id: 0,
+      clientDebtId: 0,
+      completed: false,
+      time: '',
+      employee: null,
+      client: null,
+      clientDebt: null,
+      items: items
+    } as BillDTO;
+    const billData = {
+      date: new Date().toLocaleDateString(),
+      time: new Date().toLocaleTimeString(),
+      employee: employeeValue,
+      client: clientValue,
+      items: this.Items.map(item => ({
+        name: item.item.name,
+        price: item.item.priceOutDTO?.price,
+        quantity: item.quantity,
+        notes: ''  // Add notes if any
+      })),
+      totalPrice: this.totalCostWithoutDiscount,  // Display the total without discount
+      totalQuantity: this.totalQuantity,
         debt: ''  // Add debt if any
-      };
-    
-      // Open print window
-      this.openPrintWindow(billData);
-  }
+    };
+  
+    // Open print window
+    this.openPrintWindow(billData);
+}
+PrintOrderskitchen(): void {
+  const clientValue = this.myForm.get('clientName')?.value;
+  const employeeValue = this.myForm.get('employeeName')?.value;
+  const changeBackValue = this.myForm.get('changeBack')?.value;
+  const paiedPriceValue = this.myForm.get('paiedPrice')?.value;
+  const discountValue = this.myForm.get('discount')?.value;
+
+  let items: ItemDTO[] = [];
+  this.Items.forEach(item => {
+    for (let i = 0; i < item.quantity; i++) {
+      items.push({ 
+        id: item.item.id, 
+        barcode: item.fullBarcode+"-001" 
+      } as ItemDTO);
+    }
+  });
+
+  let billDTO: BillDTO = {
+    clientId: this.clientDTOs.find(c => c.name === clientValue)?.id || -1,
+    employeeId: this.employeeDTOs.find(e => e.user.name === employeeValue)?.id || -1,
+    requierdPrice: this.totalCostWithDiscount,  // Use the total with discount here
+    paiedPrice: Number.parseInt(paiedPriceValue),
+    discount: this.totalCostWithoutDiscount-this.totalCostWithDiscount,
+    exchangeRepaied: Number.parseInt(changeBackValue),
+    id: 0,
+    clientDebtId: 0,
+    completed: false,
+    time: '',
+    employee: null,
+    client: null,
+    clientDebt: null,
+    items: items
+  };
+  const billData = {
+    date: new Date().toLocaleDateString(),
+    time: new Date().toLocaleTimeString(),
+    employee: employeeValue,
+    client: clientValue,
+    items: this.Items.map(item => ({
+      name: item.item.name,
+      price: item.item.priceOutDTO?.price,
+      quantity: item.quantity,
+      notes: ''  // Add notes if any
+    })),
+    totalPrice: this.totalCostWithoutDiscount,  // Display the total without discount
+    totalQuantity: this.totalQuantity,
+    discount: discountValue || '',  // Added discount to the bill data
+    moneyReceived: paiedPriceValue,
+    moneyToGive: changeBackValue,
+    debt: ''  // Add debt if any
+  };
+
+  // Open print window
+  this.openPrintWindowKitchen(billData);
+}
   onRefund(): void {
     if (this.myForm?.valid) {
       const clientValue = this.myForm.get('clientName')?.value;
@@ -665,6 +714,89 @@ export class AddBillComponent implements OnInit, AfterViewInit {
 
 
           </div>
+        </div>
+    <div style="margin-top: 15px; text-align: center;">
+      <div style="display: inline-block; text-align: center;">
+        <p style="margin: 2px 0;">0593-888-641</p>
+        <img style="width:45px;height:45px; margin: 0 auto 5px; display: block;" 
+             src="${qrMohammadImage}" 
+             alt="QR for Mohammad">
+        <p style="margin: 2px 0;">Cherry Restaurant & Cafe - Jericho</p>
+      </div>
+    </div>
+    `;
+
+    const printWindow = window.open('', '_blank', 'width=600,height=600');
+    if (printWindow) {
+      printWindow.document.open();
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Print Bill</title>
+            <style>
+              table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+              }
+              th, td {
+                padding: 6px;
+                text-align: left;
+              }
+              img {
+                display: block;
+                margin: 0 auto;
+              }
+            </style>
+          </head>
+          <body onload="window.print()">
+            ${printContent}
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+    }
+  }
+  openPrintWindowKitchen(billData: any): void {
+    const qrMohammad = 'https://wa.me/qr/0593888641';
+
+    const qrMohammadImage = `https://api.qrserver.com/v1/create-qr-code/?size=112x112&data=${encodeURIComponent(qrMohammad)}`;
+    const logoImage = '/assets/images/logoBlackAndWhite.png'; // Use relative path
+
+    const printContent = `
+      <div style="text-align: center; font-size: 75%;">
+        <h1>Cherry Restaurant & Cafe</h1>
+        <img src="${logoImage}" alt="Vape Hub Logo" style="width: 100px; height: auto; margin-bottom: 15px;">
+        <div style="display: flex; justify-content: space-between;">
+          <div>
+            <p>Date: ${billData.date}</p>
+            <p>Time: ${billData.time}</p>
+          </div>
+          <div>
+            <p>Employee: ${billData.employee}</p>
+            <p>Client: ${billData.client}</p>
+          </div>
+        </div>
+                <h1>طلبيات مطبخ</h1>
+
+        <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+          <thead>
+            <tr>
+              <th style="border: 1px solid black; padding: 6px;">Item</th>
+              <th style="border: 1px solid black; padding: 6px;">QTY</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${billData.items.map((item: any) => `
+              <tr>
+                <td style="border: 1px solid black; padding: 6px;">${item.name}</td>
+                 <td style="border: 1px solid black; padding: 6px;">${item.quantity}</td>
+               </tr>
+            `).join('')}
+          </tbody>
+        </table>
+        <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+ 
+ 
         </div>
     <div style="margin-top: 15px; text-align: center;">
       <div style="display: inline-block; text-align: center;">
