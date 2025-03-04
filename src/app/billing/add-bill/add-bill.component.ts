@@ -632,7 +632,7 @@ PrintOrderskitchen(): void {
   calculateTotals(): void {
     const discount = this.DiscountController.value || 0;
     this.totalCostWithoutDiscount = this.Items.reduce((sum, item) => sum + (item.item.priceOutDTO?.price || 0) * item.quantity, 0);
-    this.totalCostWithDiscount = this.totalCostWithoutDiscount - discount;  // Subtract the discount only from the final cost
+    this.totalCostWithDiscount = this.totalCostWithoutDiscount - (this.totalCostWithoutDiscount * discount / 100);
     this.totalQuantity = this.Items.reduce((sum, item) => sum + Number(item.quantity), 0);
     this.updateChangeBack();
   }

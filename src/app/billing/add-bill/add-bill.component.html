@@ -58,8 +58,8 @@
       </div>
       <div class="form-group">
         <mat-form-field class="example-full-width">
-          <mat-label>Discount (الخصم)</mat-label>
-          <input type="number" matInput formControlName="discount" placeholder="مثلاً 10 شيكل">
+          <mat-label>Discount (الخصم) %</mat-label>
+          <input type="number" matInput formControlName="discount" placeholder="مثلاً 10 %">
         </mat-form-field>
       </div>
       <div class="form-group">
@@ -110,7 +110,7 @@
           <td>{{ product.item.markaDTO.name }}</td>
           <td>{{ product.item.priceOutDTO.price }} ₪</td>
           <td>
-            <input type="number" [(ngModel)]="product.quantity" disabled="true" (change)="updateQuantity(rowIndex, $event)" min="1">
+            <input type="number" [(ngModel)]="product.quantity"  (change)="updateQuantity(rowIndex, $event)" min="1">
           </td>
           <td *ngFor="let tag of product.item.tagsDTO" style="display: flex; align-items: center; gap: 10px;">{{ tag.title }}  </td>
               <td *ngIf="product.item.tagsDTO.length<=0" style="display: flex; align-items: center; gap: 10px;"> </td>
@@ -125,7 +125,7 @@
           <td style="color: green;">Total السعر الكلي</td>
           <td style="color: green;"> </td>
           <td style="color: green;"> </td>
-          <td style="color: green;">{{ totalCostWithoutDiscount }} ₪</td>
+          <td style="color: green;">{{ totalCostWithoutDiscount }} %</td>
     
           <td style="text-align: left; color: black;">{{ totalQuantity }}</td>
           <td style="color: green;"> </td>

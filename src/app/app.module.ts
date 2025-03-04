@@ -93,7 +93,6 @@ import { DeleteMarkaDialogComponent } from './Templates/delete-marka-dialog/dele
 import { EditInventoryDialogComponent } from './helpers/edit-inventory-dialog/edit-inventory-dialog.component';
 import { EditInventoryComponent } from './inventory/inventory/edit-inventory/edit-inventory.component';
 import { TagComponent } from './items/Tags/tag-management/tag.component';
-import { AgGridModule } from 'ag-grid-angular';
 import {MatPaginatorModule} from '@angular/material/paginator'; 
 import {MatChipsModule} from '@angular/material/chips';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -199,7 +198,6 @@ import { DisplayPaylatersComponent } from './employees/display-paylaters/display
     SplitButtonModule,
     WjBarcodeCommonModule,
     AccordionModule,
-    AgGridModule,
     MatPaginatorModule,
     MatChipsModule,
     MatDatepickerModule,
