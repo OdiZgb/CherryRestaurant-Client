@@ -99,7 +99,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PaylaterComponent } from './employees/paylater/paylater.component';
 import { DisplayPaylatersComponent } from './employees/display-paylaters/display-paylaters.component';
-
+import { EmployeeAttendanceComponent } from './employee-attendance/employee-attendance.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { CardModule } from 'primeng/card';
 @NgModule({
   declarations: [
     AppComponent,
@@ -156,7 +158,8 @@ import { DisplayPaylatersComponent } from './employees/display-paylaters/display
     EditInventoryComponent,
     TagComponent,
     PaylaterComponent,
-    DisplayPaylatersComponent
+    DisplayPaylatersComponent,
+    EmployeeAttendanceComponent
   ],
   imports: [
     BrowserModule,
@@ -201,7 +204,9 @@ import { DisplayPaylatersComponent } from './employees/display-paylaters/display
     MatPaginatorModule,
     MatChipsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    DropdownModule,
+    CardModule
    ],
   providers: [
     DynamicDialogRef ,

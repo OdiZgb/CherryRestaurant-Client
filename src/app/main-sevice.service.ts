@@ -14,6 +14,7 @@ import { ClientService } from './services/Clients/client.service';
 import { TagDTO } from './DTOs/TagDTO';
 import { TagService } from './services/TagService/tag.service';
 import { PayLaterDTO } from './DTOs/PayLaterDTO';
+import { AttendanceServiceService } from './services/attendance-service.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -34,7 +35,7 @@ export class MainSeviceService implements OnInit{
   employees = new Observable<EmployeeDTO[]>();
   salaries = new Observable<SalaryDTO[]>();
   paylaters = new Observable<PayLaterDTO[]>();
-  constructor(public tradersService: TradersService,public billingService: BillsService,public tagService:TagService, public clientService: ClientService,public employeeService :EmployeeService, public store$:AppStore) {
+  constructor(public tradersService: TradersService,public billingService: BillsService,public tagService:TagService,public attendanceService:AttendanceServiceService, public clientService: ClientService,public employeeService :EmployeeService, public store$:AppStore) {
     this.traders = this.store$.select(x => x.traders);
      this.setUpObservables();
    }

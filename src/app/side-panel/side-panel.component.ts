@@ -186,6 +186,9 @@ export class SidePanelComponent implements OnInit {
   navigateToAddEmployeeRoute(): void {
     this.router.navigate(['employees/add']);
   }
+  navigateToEmployeeAttendanceRoute(): void {
+    this.router.navigate(['EmployeeAttendances']);
+  }
   
 
   navigateToAddPaylaterRoute(): void {
@@ -224,7 +227,7 @@ export class SidePanelComponent implements OnInit {
   navigateToDisplayClientDebtsRoute(): void {
     this.router.navigate(['bill/debt/display']);
   }
-  
+
   navigateToAddClientRoute() {
     this.router.navigate(['clients/add']);
     }

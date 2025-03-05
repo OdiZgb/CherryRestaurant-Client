@@ -1,0 +1,56 @@
+// employee-attendance.component.scss
+.summary-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  
+    h4 {
+      color: #6c757d;
+      margin-bottom: 0.5rem;
+    }
+  
+    .summary-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin: 0;
+    }
+  }
+  
+  .p-button {
+    min-width: 120px;
+  }
+
+  .status-checked-in {
+    color: #28a745;
+    font-weight: bold;
+  }
+  
+  .status-checked-out {
+    color: #6c757d;
+  }
+  
+  .status-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #6c757d;
+    
+    &.checked-in {
+      background-color: #28a745;
+      box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
+    }
+  }
+  
+  .current-status {
+    .p-card {
+      background: rgba(248, 249, 250, 0.9);
+      border: 2px solid #dee2e6;
+      
+      &.checked-in {
+        border-color: #28a745;
+      }
+    }
+  }

@@ -39,6 +39,7 @@ import { PricesComponent } from './prices/prices.component';
 import { TagComponent } from './items/Tags/tag-management/tag.component';
 import { PaylaterComponent } from './employees/paylater/paylater.component';
 import { DisplayPaylatersComponent } from './employees/display-paylaters/display-paylaters.component';
+import { EmployeeAttendanceComponent } from './employee-attendance/employee-attendance.component';
 
 const routes: Routes = [
   {path:'',component:AddBillComponent},
@@ -69,6 +70,7 @@ const routes: Routes = [
   {path:'employees/paylater/display',component:DisplayPaylatersComponent},
   {path:'employees/salaries/add',component:AddSalariesComponent},
   {path:'employees/salaries/display',component:DisplaySalariesComponent},
+  {path:'EmployeeAttendances',component:EmployeeAttendanceComponent},
   {path:'expenses/add',component:AddExpensesComponent},
   {path:'expenses/display',component:ExpenseComponent},
   {path:'expenses/item/add',component:AddExpenseItemComponent},
