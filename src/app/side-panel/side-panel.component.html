@@ -74,6 +74,7 @@
     <p *ngIf="securityLevel >= 99" (click)="navigateToDispalySalaryRoute()">Display Salaries (عرض رواتب الموظفين)</p>
     <p *ngIf="securityLevel >= 99" (click)="navigateToDispalyPaylaterRoute()">Display Paylater (عرض باي لاتر الموظفين)</p>
     <p (click)="navigateToEmployeeAttendanceRoute()">Display Attendance (عرض دخول/خروج الموظفين)</p>
+    <p (click)="navigateToEmployeeHReRoute()">HR Attendance ( دوام الموظفين)</p>
   </mat-expansion-panel>
 
   <mat-expansion-panel *ngIf="securityLevel >= 99"  (opened)="panelOpenState = true" (closed)="panelOpenState = false">

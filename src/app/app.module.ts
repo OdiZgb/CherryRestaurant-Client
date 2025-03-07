@@ -102,6 +102,7 @@ import { DisplayPaylatersComponent } from './employees/display-paylaters/display
 import { EmployeeAttendanceComponent } from './employee-attendance/employee-attendance.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { CardModule } from 'primeng/card';
+import { EmployeeAttendanceViewerComponent } from './employee-attendance/employee-attendance-viewer/employee-attendance-viewer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -159,7 +160,8 @@ import { CardModule } from 'primeng/card';
     TagComponent,
     PaylaterComponent,
     DisplayPaylatersComponent,
-    EmployeeAttendanceComponent
+    EmployeeAttendanceComponent,
+    EmployeeAttendanceViewerComponent
   ],
   imports: [
     BrowserModule,

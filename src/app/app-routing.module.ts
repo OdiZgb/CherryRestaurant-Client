@@ -41,6 +41,7 @@ import { PaylaterComponent } from './employees/paylater/paylater.component';
 import { DisplayPaylatersComponent } from './employees/display-paylaters/display-paylaters.component';
 import { EmployeeAttendanceComponent } from './employee-attendance/employee-attendance.component';
 import { AuthGuard } from './auth.guard';
+import { EmployeeAttendanceViewerComponent } from './employee-attendance/employee-attendance-viewer/employee-attendance-viewer.component';
 
 const routes: Routes = [
   {path:'',component:AddBillComponent},
@@ -72,6 +73,7 @@ const routes: Routes = [
   {path:'employees/salaries/add',component:AddSalariesComponent, canActivate: [AuthGuard]},
   {path:'employees/salaries/display',component:DisplaySalariesComponent, canActivate: [AuthGuard]},
   {path:'EmployeeAttendances',component:EmployeeAttendanceComponent},
+  {path:'EmployeeHR',component:EmployeeAttendanceViewerComponent, canActivate: [AuthGuard]},
   {path:'expenses/add',component:AddExpensesComponent, canActivate: [AuthGuard]},
   {path:'expenses/display',component:ExpenseComponent},
   {path:'expenses/item/add',component:AddExpenseItemComponent},

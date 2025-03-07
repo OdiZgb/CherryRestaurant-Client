@@ -1,0 +1,82 @@
+<div class="card">
+   
+  
+          <h3>Employee Attendance</h3>
+          <div>
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Employee (الموظف)</mat-label>
+                  <input type="text"
+                         placeholder="Employee's Name (إسم الموظف)"
+                         aria-label="Name"
+                         matInput
+                         formControlName="employeeName"
+                         [formControl]="EmployeeController"
+                         [matAutocomplete]="auto3">
+                  <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete" (optionSelected)="onOptionSelectedEmployee($event)">
+                    <mat-option *ngFor="let employee of employeeNames | keyvalue" [value]="employee.value">
+                      {{ employee.value }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+            </div>
+
+
+ 
+    
+      <div class="p-grid p-mb-4">
+        <div class="p-col-12 p-md-4">
+          <div class="summary-card">
+            <h4>Today's Hours</h4>
+            <p class="summary-value">{{ summary?.totalHoursToday | date:'HH:mm' || '-' }}</p>
+          </div>
+        </div>
+        <div class="p-col-12 p-md-4">
+          <div class="summary-card">
+            <h4>Monthly Hours</h4>
+            <p class="summary-value">{{ summary?.totalHoursThisMonth | date:'HH:mm' || '-' }}</p>
+          </div>
+        </div>
+        <div class="p-col-12 p-md-4">
+          <div class="summary-card">
+            <h4>Yearly Hours</h4>
+            <p class="summary-value">{{ summary?.totalHoursThisYear | date:'HH:mm' || '-' }}</p>
+          </div>
+        </div>
+      </div>
+    
+      <div class="p-mb-4">
+        <div class="p-grid">
+          <div class="p-col-12 p-md-3">
+            <p-calendar [(ngModel)]="filterDate" placeholder="Select Date" (onSelect)="loadAttendanceHistory()"></p-calendar>
+          </div>
+          <div class="p-col-12 p-md-3">
+            <p-dropdown [options]="months" [(ngModel)]="filterMonth" placeholder="Select Month" (onChange)="loadAttendanceHistory()"></p-dropdown>
+          </div>
+          <div class="p-col-12 p-md-3">
+            <p-dropdown [options]="years" [(ngModel)]="filterYear" placeholder="Select Year" (onChange)="loadAttendanceHistory()"></p-dropdown>
+          </div>
+        </div>
+      </div>
+    
+      <p-table [value]="attendanceHistory" [paginator]="true" [rows]="10">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Check In Time</th>
+            <th>Check Out Time</th>
+            <th>Duration</th>
+            <th>Date</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-record>
+          <tr>
+            <td>{{ record.checkInTime | date:'shortTime' }}</td>
+            <td>{{ record.checkOutTime | date:'shortTime' || '-' }}</td>
+            <td>{{ formatDuration(record.checkInTime, record.checkOutTime) }}</td>
+            <td>{{ record.checkInTime | date:'mediumDate' }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+  </div>
+  

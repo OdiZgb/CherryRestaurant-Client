@@ -191,8 +191,11 @@ export class SidePanelComponent implements OnInit {
   navigateToEmployeeAttendanceRoute(): void {
     this.router.navigate(['EmployeeAttendances']);
   }
+  navigateToEmployeeHReRoute(): void {
+    this.router.navigate(['EmployeeHR']);
+  }
   
-
+  
   navigateToAddPaylaterRoute(): void {
     this.router.navigate(['employees/paylater/add']);
   }
