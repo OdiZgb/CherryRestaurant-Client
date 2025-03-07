@@ -8,6 +8,7 @@ export class EmployeeAttendanceDTO {
     employeeId: number;
     checkInTime: Date;
     checkOutTime?: Date | null;
+    duration: string | null | undefined;
 
     constructor(id: number, employeeId: number, checkInTime: Date, checkOutTime?: Date | null) {
         this.id = id;
@@ -16,13 +17,5 @@ export class EmployeeAttendanceDTO {
         this.checkOutTime = checkOutTime ?? null;
     }
 
-    get duration(): string | null {
-        if (this.checkOutTime) {
-            const durationMs = this.checkOutTime.getTime() - this.checkInTime.getTime();
-            const hours = Math.floor(durationMs / (1000 * 60 * 60));
-            const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
-            return `${hours}h ${minutes}m`;
-        }
-        return null;
-    }
+ 
 }

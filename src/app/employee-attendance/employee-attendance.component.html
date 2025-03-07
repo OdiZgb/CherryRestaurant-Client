@@ -86,7 +86,7 @@
         <tr>
           <td>{{ record.checkInTime | date:'shortTime' }}</td>
           <td>{{ record.checkOutTime | date:'shortTime' || '-' }}</td>
-          <td>{{ formatDuration(record.duration) }}</td>
+          <td>{{ formatDuration(record.checkInTime, record.checkOutTime) }}</td>
           <td>{{ record.checkInTime | date:'mediumDate' }}</td>
         </tr>
       </ng-template>

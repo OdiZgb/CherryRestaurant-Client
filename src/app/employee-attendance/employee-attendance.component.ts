@@ -152,10 +152,21 @@ export class EmployeeAttendanceComponent implements OnInit {
     });
   }
 
-  formatDuration(duration: { hours: number, minutes: number }): string {
-    return duration ? `${duration.hours}h ${duration.minutes}m` : '-';
+  formatDuration(checkInTime: string, checkOutTime: string | null): string {
+    if (!checkOutTime) return '-'; // If user hasn't checked out yet
+  
+    const checkIn = new Date(checkInTime);
+    const checkOut = new Date(checkOutTime);
+    const diffMs = checkOut.getTime() - checkIn.getTime(); // Difference in milliseconds
+  
+    if (diffMs <= 0) return '-'; // Invalid data scenario
+  
+    const hours = Math.floor(diffMs / (1000 * 60 * 60)); // Convert ms to hours
+    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60)); // Convert remaining ms to minutes
+  
+    return `${hours}h ${minutes}m`;
   }
-
+  
   private handleSuccess(message: string): void {
     this.messageService.add({
       severity: 'success',
