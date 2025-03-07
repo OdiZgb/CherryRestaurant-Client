@@ -8,12 +8,14 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./side-panel.component.scss']
 })
 export class SidePanelComponent implements OnInit {
+  securityLevel: number = 0; // Default to lowest access
 
   panelOpenState = false;
   constructor(private router: Router) { }
   items: MenuItem[] = [];
   ngOnInit(): void {
-
+    const storedLevel = localStorage.getItem('SecurityLevel') +"";
+    this.securityLevel =  this.securityLevel = Number.parseInt(storedLevel);
     this.items = [
       {
           label: 'Products',

@@ -7,15 +7,15 @@
       </mat-panel-title>
 
     </mat-expansion-panel-header>
-    <p (click)="navigateToAddItemRoute()">Add Product (أضف مُنتج)</p>
-    <p (click)="navigateToDisplayProducsRoute()">Display Products (عرض المُنتجات)</p>
-    <p (click)="navigateToeEpiringitemsRoute()">Expiring Products (تواريخ الصلاحية)</p>
-    <p (click)="navigateToTagsRoute()">Tags موضحات المنتجات</p>
+    <p *ngIf="securityLevel >= 99"(click)="navigateToAddItemRoute()">Add Product (أضف مُنتج)</p>
+    <p  (click)="navigateToDisplayProducsRoute()">Display Products (عرض المُنتجات)</p>
+    <p *ngIf="securityLevel >= 99" (click)="navigateToeEpiringitemsRoute()">Expiring Products (تواريخ الصلاحية)</p>
+    <p *ngIf="securityLevel >= 99" (click)="navigateToTagsRoute()">Tags موضحات المنتجات</p>
 
   </mat-expansion-panel>
 
 
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel *ngIf="securityLevel >= 99" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Catrgories الأصناف
@@ -25,7 +25,7 @@
     <p (click)="navigateToDisplayCategoriesRoute()">Display Categories (عرض الفِئات)</p>
   </mat-expansion-panel>
 
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel *ngIf="securityLevel >= 99" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Brands الماركات
@@ -35,7 +35,7 @@
     <p (click)="navigateToDisplayMarkasRoute()">Display Brands (عرض الماركات)</p>
   </mat-expansion-panel>
 
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel *ngIf="securityLevel >= 99"  (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Prices الأسعار
@@ -48,7 +48,7 @@
   </mat-expansion-panel>
 
 
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel *ngIf="securityLevel >= 99" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Repository المُستودع
@@ -67,16 +67,16 @@
         Employees الموظفين
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <p (click)="navigateToDisplayEmployeesRoute()">Display Employees (عرض الموظفين)</p>
-    <p (click)="navigateToAddEmployeeRoute()">Add Employee (أضف موظف)</p>
-    <p (click)="navigateToAddSalaryRoute()">Add Salary (أضف راتب لموظف)</p>
-    <p (click)="navigateToAddPaylaterRoute()">Add paylater (أضف باي لاتر لموظف)</p>
-    <p (click)="navigateToDispalySalaryRoute()">Display Salaries (عرض رواتب الموظفين)</p>
-    <p (click)="navigateToDispalyPaylaterRoute()">Display Paylater (عرض باي لاتر الموظفين)</p>
+    <p *ngIf="securityLevel >= 99"  (click)="navigateToDisplayEmployeesRoute()">Display Employees (عرض الموظفين)</p>
+    <p *ngIf="securityLevel >= 99"  (click)="navigateToAddEmployeeRoute()">Add Employee (أضف موظف)</p>
+    <p *ngIf="securityLevel >= 99"  (click)="navigateToAddSalaryRoute()">Add Salary (أضف راتب لموظف)</p>
+    <p *ngIf="securityLevel >= 99" (click)="navigateToAddPaylaterRoute()">Add paylater (أضف باي لاتر لموظف)</p>
+    <p *ngIf="securityLevel >= 99" (click)="navigateToDispalySalaryRoute()">Display Salaries (عرض رواتب الموظفين)</p>
+    <p *ngIf="securityLevel >= 99" (click)="navigateToDispalyPaylaterRoute()">Display Paylater (عرض باي لاتر الموظفين)</p>
     <p (click)="navigateToEmployeeAttendanceRoute()">Display Attendance (عرض دخول/خروج الموظفين)</p>
   </mat-expansion-panel>
 
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel *ngIf="securityLevel >= 99"  (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Traders التُجار
@@ -86,7 +86,7 @@
     <p (click)="navigateToAddTraderRoute()">Add Traders (أضف تاجر)</p>
   </mat-expansion-panel>
 
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Expenses النثريات
@@ -96,7 +96,7 @@
     <p (click)="navigateToAddExpensesRoute()">Add Expenses (أضف نثيرية)</p>
     <p (click)="navigateToAddExpenseItemRoute()">Add Expense Item (أضف مبلغ للنثريات)</p>
   </mat-expansion-panel>
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel *ngIf="securityLevel >= 99"  (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Billing البيع
@@ -106,13 +106,13 @@
     <p (click)="navigateToCashBillHistoryRoute()">View Bill History (سجل البيع)</p>
     <p (click)="navigateToCashDeletedBillHistoryRoute()">View Deleted Bill History ( سجل البيع المحذوف)</p>
   </mat-expansion-panel>
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel *ngIf="securityLevel >= 99"   (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Clients الزبائن
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <p (click)="navigateToAddClientRoute()">Add Client  اضف الزبائِن</p>
+    <p *ngIf="securityLevel >= 99"  (click)="navigateToAddClientRoute()">Add Client  اضف الزبائِن</p>
     <p (click)="navigateToDisplayClientDebtsRoute()">Display Client Debts عرض دَين الزبائِن</p>
     <p (click)="navigateToViewClientRoute()">View Clients  عرض الزبائن</p>
 
