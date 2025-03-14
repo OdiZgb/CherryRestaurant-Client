@@ -10,7 +10,7 @@ import { UserDTO } from 'src/app/DTOs/UserDTO';
 export class AuthServiceService {
   public loggedInSubject = new BehaviorSubject<boolean>(false); // Starting with not logged in
    
-  apiURL ='https://localhost:7260/user/';
+  apiURL ='http://192.168.1.99:5213/user/';
   constructor(private httpClient:HttpClient) { }
   
   public login(userDTO:UserDTO): Observable<UserDTO>{

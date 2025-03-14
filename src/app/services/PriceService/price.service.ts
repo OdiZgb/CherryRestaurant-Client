@@ -8,7 +8,7 @@ import { PriceOutDTO } from 'src/app/DTOs/PriceOutDTO';
   providedIn: 'root'
 })
 export class PriceService {
-  apiURL ='https://localhost:7260/price/';
+  apiURL ='http://192.168.1.99:5213/price/';
   constructor(private httpClient:HttpClient) { }
   
   public addPriceIn(priceInDTO:PriceInDTO): Observable<PriceInDTO>{

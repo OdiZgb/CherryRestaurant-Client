@@ -10,7 +10,7 @@ import { ShipmentImageDTO } from 'src/app/DTOs/ShipmentImageDTO';
 })
 export class InventoryService {
 
-  apiURL ='https://localhost:7260/inventory/';
+  apiURL ='http://192.168.1.99:5213/inventory/';
   constructor(private httpClient:HttpClient) { }
   
   public addToInventory(inventoryDTOs:InventoryDTO[]): Observable<InventoryDTO[]>{

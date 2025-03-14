@@ -9,7 +9,7 @@ import { ItemImageDTO } from 'src/app/DTOs/ItemImageDTO';
 })
 export class ItemListService {
   
-  apiURL ='https://localhost:7260/item/';
+  apiURL ='http://192.168.1.99:5213/item/';
   constructor(private httpClient:HttpClient) { }
 
   public getAllItemsList$():Observable<ItemDTO[]>{

@@ -7,7 +7,7 @@ import { CategoryDTO } from 'src/app/DTOs/CategoryDTO';
   providedIn: 'root'
 })
 export class CategoryService {
-  apiURL ='https://localhost:7260/category/';
+  apiURL ='http://192.168.1.99:5213/category/';
   constructor(private httpClient:HttpClient) { }
 
   public addCategory(category:CategoryDTO): Observable<CategoryDTO>{

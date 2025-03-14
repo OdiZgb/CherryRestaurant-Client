@@ -15,7 +15,7 @@ import { AppStore } from 'src/app/AppStore/AppStore';
   providers:[DialogService]
 })
 export class ItemViewComponent implements OnInit {
-  apiURL ='https://localhost:7260';
+  apiURL ='http://192.168.1.99:5213';
 
   itemId='';
   

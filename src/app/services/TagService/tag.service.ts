@@ -9,7 +9,7 @@ import { TagItemDTO } from 'src/app/DTOs/TagItemDTO';
   providedIn: 'root'
 })
 export class TagService {
-  private apiURL ='https://localhost:7260/tag';  // Update with your backend URL
+  private apiURL ='http://192.168.1.99:5213/tag';  // Update with your backend URL
 
   constructor(private http: HttpClient) {}
 

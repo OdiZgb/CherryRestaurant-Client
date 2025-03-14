@@ -21,7 +21,7 @@ export class ShipmentItemDetailsComponent implements OnInit {
   trader!:TraderDTO| null ;
   imageURL:string = "";
   itemImageURL:string = "";
-  apiURL ='https://localhost:7260';
+  apiURL ='http://192.168.1.99:5213';
 
   ngOnInit(): void {
     this.invBarcode = this.route.snapshot.paramMap.get('invBarcode') || "";
