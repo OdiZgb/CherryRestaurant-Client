@@ -17,8 +17,11 @@ export class AppComponent implements OnInit {
   username: string | null = "";
 
   constructor(private router: Router, private authServiceService: AuthServiceService) {}
+  securityLevel: number = 0; // Default to lowest access
 
   ngOnInit(): void {
+    const storedLevel = localStorage.getItem('SecurityLevel') +"";
+    this.securityLevel =  this.securityLevel = Number.parseInt(storedLevel);
     let token = localStorage.getItem("token");
     if (token != null) {
       const helper = new JwtHelperService();
@@ -83,5 +86,8 @@ export class AppComponent implements OnInit {
 
   navigateToDefaulRoute() {
     this.router.navigate(['']);
+  }
+  navigateToAttendence() {
+    this.router.navigate(['EmployeeAttendances']);
   }
 }

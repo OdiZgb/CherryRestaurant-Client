@@ -138,7 +138,7 @@ export class EmployeeAttendanceComponent implements OnInit {
     this.isCheckingIn = true;
     this.mainService.attendanceService.checkIn(this.employeeId).subscribe({
       next: () => {
-        this.handleSuccess('Checked in successfully');
+        this.handleSuccess('تم تسجيل بصمة الدخول');
         this.loadAllData();
       },
       error: (err) => {
@@ -154,7 +154,9 @@ export class EmployeeAttendanceComponent implements OnInit {
 
     this.mainService.attendanceService.checkOut(this.employeeId).subscribe({
       next: () => {
-        this.handleSuccess('Checked out successfully');
+        let username = localStorage.getItem("username");
+
+        this.handleSuccess( ' 😁 '+username+' '+'تم الخروج استرح يا');
         this.loadAllData();
       },
       error: (err) => this.handleError(err)
@@ -179,7 +181,7 @@ export class EmployeeAttendanceComponent implements OnInit {
   private handleSuccess(message: string): void {
     this.messageService.add({
       severity: 'success',
-      summary: 'Success',
+      summary: 'نجحت العملية',
       detail: message,
       life: 3000
     });

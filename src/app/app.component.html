@@ -3,7 +3,8 @@
     <div  class="row" style="float: right;">
       <mat-toolbar  style="width: 100%;float: left;  background-color: rgb(221, 57, 57);;">
         <div style="width: 95%;">
-          <span style=" float: left;cursor:pointer; color:white;font-weight: bold;" (click)="navigateToDefaulRoute()">CherryRestaurant</span>
+          <span *ngIf="securityLevel >= 99" style=" float: left;cursor:pointer; color:white;font-weight: bold;" (click)="navigateToDefaulRoute()">CherryRestaurant</span>
+          <span *ngIf="securityLevel < 99" style=" float: left;cursor:pointer; color:white;font-weight: bold;" (click)="navigateToAttendence()">CherryRestaurant</span>
         </div>
         <p-splitButton style="margin-top: 10px;" styleClass="p-button-raised p-button-danger mr-2 mb-2" label="{{username}}" icon="pi pi-user" (onClick)="logout()" [model]="items"></p-splitButton>
 
