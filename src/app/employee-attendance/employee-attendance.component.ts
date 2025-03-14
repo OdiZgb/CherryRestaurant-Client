@@ -27,11 +27,20 @@ export class EmployeeAttendanceComponent implements OnInit {
   isCheckingIn = false;
 
   // Dropdown options
-  months = Array.from({length: 12}, (_, i) => ({
-    label: new Date(0, i).toLocaleString('en', {month: 'long'}),
-    value: i + 1
-  }));
-
+  months = [
+    { label: 'يناير', value: 1 },
+    { label: 'فبراير', value: 2 },
+    { label: 'مارس', value: 3 },
+    { label: 'أبريل', value: 4 },
+    { label: 'مايو', value: 5 },
+    { label: 'يونيو', value: 6 },
+    { label: 'يوليو', value: 7 },
+    { label: 'أغسطس', value: 8 },
+    { label: 'سبتمبر', value: 9 },
+    { label: 'أكتوبر', value: 10 },
+    { label: 'نوفمبر', value: 11 },
+    { label: 'ديسمبر', value: 12 }
+  ];
   years = Array.from({length: 10}, (_, i) => ({
     label: (new Date().getFullYear() - i).toString(),
     value: new Date().getFullYear() - i
