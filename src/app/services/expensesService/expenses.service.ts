@@ -8,7 +8,7 @@ import { ExpenseItemDTO } from 'src/app/DTOs/ExpenseItemDTO';
   providedIn: 'root'
 })
 export class ExpensesService {
-  apiURL ='http://192.168.1.99:5213/expense/';
+  apiURL ='http://192.168.0.99:5213/expense/';
   constructor(private httpClient:HttpClient) { }
 
   public addExpenseCategory(expenseCategoryDTO:ExpenseCategoryDTO): Observable<ExpenseCategoryDTO>{

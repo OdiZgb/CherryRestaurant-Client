@@ -16,7 +16,7 @@ import { EditInventoryDialogComponent } from 'src/app/helpers/edit-inventory-dia
   styleUrls: ['./inventory-template.component.scss']
 })
 export class InventoryTemplateComponent implements OnInit {
-  apiURL = 'http://192.168.1.99:5213';
+  apiURL = 'http://192.168.0.99:5213';
   barcode = '';
   inventoryDTOs: InventoryDTO[] = [];
   imageURL = '';

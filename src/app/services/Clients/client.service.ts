@@ -7,7 +7,7 @@ import { ClientDTO } from 'src/app/DTOs/ClientDTO';
   providedIn: 'root'
 })
 export class ClientService {
-  apiURL ='http://192.168.1.99:5213/client/';
+  apiURL ='http://192.168.0.99:5213/client/';
   constructor(private httpClient:HttpClient) { }
 
   public addClient(client:ClientDTO): Observable<ClientDTO>{

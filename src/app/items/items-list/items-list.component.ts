@@ -10,7 +10,7 @@ import { CategoryService } from 'src/app/services/CategoryService/category.servi
   styleUrls: ['./items-list.component.scss']
 })
 export class ItemsListComponent implements OnInit, AfterViewInit {
-  apiURL = 'http://192.168.1.99:5213';
+  apiURL = 'http://192.168.0.99:5213';
   scrollKey = 'itemsListScrollPosition'; // Key for localStorage
 
   constructor(

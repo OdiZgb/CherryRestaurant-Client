@@ -8,7 +8,7 @@ import { MarkaDTO } from 'src/app/DTOs/MarkaDTO';
 })
 export class MarkaService {  
 
-apiURL ='http://192.168.1.99:5213/marka/';
+apiURL ='http://192.168.0.99:5213/marka/';
 constructor(private httpClient:HttpClient) { }
 
 public addMarka(marka:MarkaDTO): Observable<MarkaDTO>{

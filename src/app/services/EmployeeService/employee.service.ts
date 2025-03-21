@@ -10,7 +10,7 @@ import { SalaryDTO } from 'src/app/DTOs/SalaryDTO';
 })
 export class EmployeeService {
 
-  apiURL = 'http://192.168.1.99:5213/employee/';
+  apiURL = 'http://192.168.0.99:5213/employee/';
   constructor(private httpClient: HttpClient) { }
 
   public addEmployee(EmployeeDTO: EmployeeDTO): Observable<EmployeeDTO> {

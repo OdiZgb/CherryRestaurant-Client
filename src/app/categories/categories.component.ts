@@ -10,7 +10,7 @@ import { CategoryDTO } from '../DTOs/CategoryDTO';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  apiURL ='http://192.168.1.99:5213';
+  apiURL ='http://192.168.0.99:5213';
 
   constructor(public mainSeviceService:MainSeviceService ,private cd: ChangeDetectorRef,public categoryService:CategoryService, private itemListService:ItemListService) { }
 

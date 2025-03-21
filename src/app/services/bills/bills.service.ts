@@ -10,9 +10,9 @@ import { HistoryOfCashBill } from 'src/app/DTOs/HistoryOfCashBill';
   providedIn: 'root'
 })
 export class BillsService {
-  apiURL ='http://192.168.1.99:5213/bill/';
-  apiURL2 ='http://192.168.1.99:5213/inventory/';
-  apiURL3 ='http://192.168.1.99:5213/bill/';
+  apiURL ='http://192.168.0.99:5213/bill/';
+  apiURL2 ='http://192.168.0.99:5213/inventory/';
+  apiURL3 ='http://192.168.0.99:5213/bill/';
   constructor(private httpClient:HttpClient) { }
   
   public addToBill(category:BillDTO): Observable<BillDTO>{

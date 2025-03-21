@@ -12,7 +12,7 @@ import { MarkaService } from '../services/MarkaService/marka.service';
   styleUrls: ['./markas.component.scss']
 })
 export class MarkasComponent {
-  apiURL ='http://192.168.1.99:5213';
+  apiURL ='http://192.168.0.99:5213';
 
   constructor(public mainSeviceService:MainSeviceService ,private cd: ChangeDetectorRef,public markaService:MarkaService, private itemListService:ItemListService) { }
 

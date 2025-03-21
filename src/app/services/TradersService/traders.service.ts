@@ -8,7 +8,7 @@ import { TraderDTO } from 'src/app/DTOs/TraderDTO';
 })
 export class TradersService {
 
-  apiURL = 'http://192.168.1.99:5213/trader/';
+  apiURL = 'http://192.168.0.99:5213/trader/';
   constructor(private httpClient: HttpClient) { }
 
   public addTrader(TraderDTO: TraderDTO): Observable<TraderDTO> {
