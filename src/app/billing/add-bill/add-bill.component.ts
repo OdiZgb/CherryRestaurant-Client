@@ -710,7 +710,7 @@ PrintOrderskitchen(): void {
           <div>
             <p>Total Price: ${billData.totalPrice}₪</p>
             <p>Discount: ${billData.discount}₪</p>
-            <p>Final Price: ${this.totalCostWithDiscount}₪</p>
+            <h1 style="font-size:20px">Final Price: ${this.totalCostWithDiscount}₪</h1>
 
 
           </div>
