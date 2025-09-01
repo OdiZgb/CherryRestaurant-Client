@@ -432,7 +432,7 @@ openPrintWindowCash(): void {
           </style>
         </head>
         <body onload="window.print()">
-          <img src="${logoImage}" alt="Logo" />
+          <img style="height:150px;width:150px;" src="${logoImage}" alt="Logo" />
           ${printContent}
         </body>
       </html>
