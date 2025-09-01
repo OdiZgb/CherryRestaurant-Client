@@ -15,11 +15,13 @@ export class AppComponent implements OnInit {
   loggedin: boolean = false;
   items: MenuItem[] = [];
   username: string | null = "";
-
+  isSubscriptionExpired: boolean = false;
+  subscriptionExpiry = new Date("2025-12-25"); // yyyy-mm-dd format
   constructor(private router: Router, private authServiceService: AuthServiceService) {}
   securityLevel: number = 0; // Default to lowest access
 
   ngOnInit(): void {
+    this.checkSubscription();
     const storedLevel = localStorage.getItem('SecurityLevel') +"";
     this.securityLevel =  this.securityLevel = Number.parseInt(storedLevel);
     let token = localStorage.getItem("token");
@@ -57,7 +59,13 @@ export class AppComponent implements OnInit {
       }
     ];
   }
-
+  checkSubscription() {
+    const today = new Date();
+    if (today > this.subscriptionExpiry) {
+      this.isSubscriptionExpired = true;
+      this.loggedin = false;
+    }
+  }
   logout() {
     localStorage.removeItem("token");
     this.loggedin = false;

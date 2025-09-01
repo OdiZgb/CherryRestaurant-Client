@@ -1,4 +1,4 @@
-<div *ngIf="loggedin==true">
+<div *ngIf="loggedin==true && !isSubscriptionExpired">
   <div class="container-fluid" >
     <div  class="row" style="float: right;">
       <mat-toolbar  style="width: 100%;float: left;  background-color: rgb(221, 57, 57);;">
@@ -25,9 +25,15 @@
     <h5 style="text-align: center;">Zaghab Systems © Copyrights reserved {{date}}</h5>
   </footer>
 </div>
-
+<div *ngIf="isSubscriptionExpired" style="text-align: center; margin-top: 100px;">
+  <h2 style="color: red; font-weight: bold;"> 0594245425 يرجى تجديد الاشتراك للتواصل</h2>
+  <p>تاريخ انتهاء الاشتراك: {{ subscriptionExpiry | date:'yyyy/MM/dd' }}</p>
+</div>
 <div style="width: 100%;" *ngIf="loggedin==false">
   <app-login style="width: 100%;" ></app-login>
+</div>
+<div *ngIf="!loggedin && !isSubscriptionExpired">
+  <app-login style="width: 100%;"></app-login>
 </div>
 <p-toast [position]="'bottom-right'"></p-toast>
 
